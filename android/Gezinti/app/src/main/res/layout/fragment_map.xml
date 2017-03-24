@@ -1,17 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hackathon.gezinti.MainActivity">
+    tools:context="com.hackathon.gezinti.ui.MapFragment">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Test Button"/>
-
-    <FrameLayout
-        android:id="@+id/fl_map_container"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mv_maps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
