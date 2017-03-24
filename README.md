@@ -1,3 +1,3 @@
 # gezinti
-Getir &amp; Birebir Hackathon
+Getir &amp; BiTaksi Hackathon
 Getir
