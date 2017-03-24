@@ -22,6 +22,7 @@ exports.registerUser = function(req,res){
   });
 };
 
+
 exports.selectUser = function(req,res){
   if(typeof(req.body.userId) == undefined)
     res.send("userId is required");
