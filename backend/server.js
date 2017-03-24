@@ -1,18 +1,25 @@
 var express = require('express'),
+session = require('express-session'),
 app = express(),
-port = process.env.PORT || 9999;
+port = process.env.PORT || 9999,
+bodyParser = require('body-parser'),
+mongoose = require('mongoose'),
+user = require ('./api/models/userModel');
 
-app.use(session({
-  store: new RedisStore({
-    url: config.redisStore.url
-  }),
-  secret: config.redisStore.secret,
-  resave: false,
-  saveUnitialized: false
-}));
-app.use(password.initialize());
-app.use(password.session());
+console.log('Creating Database Connection');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://nalbayrak:ozamanrenkdans@ds141450.mlab.com:41450/gezentidb');
+console.log('Database Connected');
 
+app.use(session({secret: 'zalimcoding2017'}));
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+var routes = require('./api/routes/defaultRoutes');
+routes(app);
 
 app.listen(port);
 
