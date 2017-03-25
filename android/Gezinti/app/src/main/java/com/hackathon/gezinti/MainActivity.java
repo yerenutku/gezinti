@@ -8,10 +8,7 @@ import android.widget.Button;
 
 import com.hackathon.gezinti.fragment.BottomSheetListFragment;
 import com.hackathon.gezinti.fragment.MapFragment;
-import com.hackathon.gezinti.models.common.Coordinates;
-import com.hackathon.gezinti.models.request.EventCreateRequest;
 import com.hackathon.gezinti.models.response.EventCreateResponse;
-import com.hackathon.gezinti.network.EventInteractor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,17 +33,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .commit();
         }
 
-        EventInteractor interactor = new EventInteractor();
-        EventCreateRequest eventCreateRequest = new EventCreateRequest();
-        eventCreateRequest.setTitle("eren");
-        eventCreateRequest.setDesc("açıklama");
-        eventCreateRequest.setOwner("58d553e3ef54401bec32899d");
-        eventCreateRequest.setTime("2018-05-18T16:00:00.000Z");
-        ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
-        coordinates.add(new Coordinates("65.5","56.6"));
-        coordinates.add(new Coordinates("31.5","32.6"));
-        eventCreateRequest.setCoordinates(coordinates);
-        interactor.eventCreate(this,eventCreateRequest);
+//        EventInteractor interactor = new EventInteractor(this);
+//        EventCreateRequest eventCreateRequest = new EventCreateRequest();
+//        eventCreateRequest.setTitle("eren");
+//        eventCreateRequest.setDesc("açıklama");
+//        eventCreateRequest.setOwner("58d553e3ef54401bec32899d");
+//        eventCreateRequest.setTime("2018-05-18T16:00:00.000Z");
+//        ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
+//        coordinates.add(new Coordinates("65.5","56.6"));
+//        coordinates.add(new Coordinates("31.5","32.6"));
+//        eventCreateRequest.setCoordinates(coordinates);
+//        interactor.eventCreate(eventCreateRequest, new EventCreateListener() {
+//            @Override
+//            public void onResponse(EventCreateResponse response) {
+//
+//            }
+//
+//            @Override
+//            public void onError(String errorMessage) {
+//
+//            }
+//
+//            @Override
+//            public void onBeforeRequest() {
+//
+//            }
+//
+//            @Override
+//            public void onAfterRequest() {
+//
+//            }
+//        });
 
 
     }

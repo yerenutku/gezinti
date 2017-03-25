@@ -15,6 +15,8 @@ import com.hackathon.gezinti.models.BaseRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+
 public class VolleyClientRequests {
 
     private static VolleyClientRequests instance;
@@ -36,7 +38,7 @@ public class VolleyClientRequests {
         return instance;
     }
 
-    public void postRequest(String url, BaseRequest request, SuccessListener successListener, Response.ErrorListener errorListener) {
+    public void post(String url, BaseRequest request, SuccessListener successListener, Response.ErrorListener errorListener) {
         try {
             successListener.setResponseType(request.getResponseType());
             String tempJson = mGson.toJson(request);
@@ -46,6 +48,12 @@ public class VolleyClientRequests {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void get(String url, Type type, SuccessListener successListener, Response.ErrorListener errorListener) {
+        successListener.setResponseType(type);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.BASE_URL + url, null, successListener, errorListener);
+        requestQueue.add(jsonObjectRequest);
     }
 
 
