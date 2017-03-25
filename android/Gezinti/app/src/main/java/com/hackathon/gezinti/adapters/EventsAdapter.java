@@ -9,19 +9,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hackathon.gezinti.R;
-import com.hackathon.gezinti.models.EventResponse;
+import com.hackathon.gezinti.models.response.EventCreateResponse;
 
 import java.util.List;
 
 // temp adapter
 public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<EventResponse> mEventResponseList;
+    private List<EventCreateResponse> mEventCreateResponseList;
     private Context mContext;
     private static final int FOOTER_VIEW = 1;
 
-    public EventsAdapter(List<EventResponse> eventResponseList, Context context) {
-        mEventResponseList = eventResponseList;
+    public EventsAdapter(List<EventCreateResponse> eventCreateResponseList, Context context) {
+        mEventCreateResponseList = eventCreateResponseList;
         mContext = context;
     }
 
@@ -42,21 +42,21 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
-            myViewHolder.tvText.setText(mEventResponseList.get(position).getText() + position);
+//            myViewHolder.tvText.setText(mEventCreateResponseList.get(position).getText() + position);
         }
     }
 
     @Override
     public int getItemCount() {
-        if (mEventResponseList == null) {
+        if (mEventCreateResponseList == null) {
             return 0;
         }
-        if (mEventResponseList.size() == 0) {
+        if (mEventCreateResponseList.size() == 0) {
             //Return 1 here to show nothing
             return 1;
         }
         // Add extra view to show the footer view
-        return mEventResponseList.size() + 1;
+        return mEventCreateResponseList.size() + 1;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -85,7 +85,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mEventResponseList.size()) {
+        if (position == mEventCreateResponseList.size()) {
             // This is where we'll add footer.
             return FOOTER_VIEW;
         }

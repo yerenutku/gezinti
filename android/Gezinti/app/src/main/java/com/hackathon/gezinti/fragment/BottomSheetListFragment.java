@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.adapters.EventsAdapter;
-import com.hackathon.gezinti.models.EventResponse;
+import com.hackathon.gezinti.models.response.EventCreateResponse;
 
 import java.util.List;
 
@@ -48,8 +48,8 @@ public class BottomSheetListFragment extends Fragment {
     public BottomSheetBehavior.BottomSheetCallback getBottomSheetCallback() {
         return bottomSheetCallback;
     }
-    public void setEventsForPosition(List<EventResponse> eventResponseList){
-        mEventsAdapter = new EventsAdapter(eventResponseList,getContext());
+    public void setEventsForPosition(List<EventCreateResponse> eventCreateResponseList){
+        mEventsAdapter = new EventsAdapter(eventCreateResponseList,getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mEventsAdapter);
     }

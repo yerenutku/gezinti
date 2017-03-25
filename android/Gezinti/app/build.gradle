@@ -14,11 +14,11 @@ android {
     buildTypes {
         debug {
             resValue "string", "google_maps_api_key", "AIzaSyBTtgZqA-9YuoIyxGwXE3OsEhns-a5bjN8"
-            buildConfigField "String", "BASE_URL", '"https://getir-bitaksi-hackathon.herokuapp.com/getElements"'
+            buildConfigField "String", "BASE_URL", '"http://192.168.88.63:9999"'
         }
         release {
             resValue "string", "google_maps_api_key", "AIzaSyBTtgZqA-9YuoIyxGwXE3OsEhns-a5bjN8"
-            buildConfigField "String", "BASE_URL", '"http://yerenutku.github.io/cheersgamebackend/backend/games"'
+            buildConfigField "String", "BASE_URL", '"192.168.88.63:9999"'
         }
     }
 }
