@@ -91,6 +91,16 @@ exports.getEventsByLatLong = function(req,res){
         }
       }
     });
+    var eventTime = req.body.eventTime, eventType = req.body.eventType;
+    resultArray.filter(function(elem){
+      var count = 0;
+      if(eventTime == 0 || elem.eventTime == eventTime)
+        count ++;
+      if(eventType == 0 || elem.eventType == eventType)
+        count ++;
+      if(count == 2)
+        return elem;
+    });
     resultList.result = resultArray;
     res.json(resultList);
   }).catch(function(err){
