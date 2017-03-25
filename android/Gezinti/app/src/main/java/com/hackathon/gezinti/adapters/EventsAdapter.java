@@ -41,7 +41,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
-//            myViewHolder.tvText.setText(mEventCreateResponseList.get(position).getText() + position);
+            myViewHolder.tvText.setText(mEvents.get(position).getTitle());
         }
     }
 

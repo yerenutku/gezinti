@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.hackathon.gezinti.models.EventResponse;
+import com.hackathon.gezinti.models.common.Event;
 
 public class EventDetailActivity extends AppCompatActivity {
 
-    private EventResponse mEventResponse;
+    private Event mEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +17,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         if(bundle == null) finish();
-        mEventResponse = (EventResponse) bundle.getSerializable("EventDetail");
+        mEvent = (Event) bundle.getSerializable("EventDetail");
 
-        Log.d("EventDetail", mEventResponse.getText() + " - " + mEventResponse.getLatitude() + " " + mEventResponse.getLongitude());
+        Log.d("EventDetail", mEvent.getTitle() + " - " + mEvent.getCoordinatesList().get(0).getLat() + " " + mEvent.getCoordinatesList().get(0).getLon());
 
     }
 }

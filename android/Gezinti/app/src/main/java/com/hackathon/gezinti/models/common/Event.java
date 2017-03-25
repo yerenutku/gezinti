@@ -19,16 +19,13 @@ public class Event implements Serializable{
     public String title;
 
     @SerializedName("owner")
-    public Owner owner;
+    public User owner;
 
     @SerializedName("desc")
     public String desc;
 
     @SerializedName("time")
     public String time;
-
-    @SerializedName("messages")
-    public ArrayList<Object> messages;
 
     @SerializedName("location")
     public List<Coordinates> mCoordinatesList;
@@ -49,7 +46,7 @@ public class Event implements Serializable{
         return title;
     }
 
-    public Owner getOwner() {
+    public User getOwner() {
         return owner;
     }
 
@@ -59,10 +56,6 @@ public class Event implements Serializable{
 
     public String getTime() {
         return time;
-    }
-
-    public ArrayList<Object> getMessages() {
-        return messages;
     }
 
     public List<Coordinates> getCoordinatesList() {

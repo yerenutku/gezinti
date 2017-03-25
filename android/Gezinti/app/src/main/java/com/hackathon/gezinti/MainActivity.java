@@ -21,9 +21,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.hackathon.gezinti.fragment.BottomSheetListFragment;
 import com.hackathon.gezinti.fragment.MapFragment;
 import com.hackathon.gezinti.interfaces.EventSearchListener;
+import com.hackathon.gezinti.models.common.Event;
 import com.hackathon.gezinti.models.request.EventSearchRequest;
 import com.hackathon.gezinti.models.response.EventSearchResponse;
 import com.hackathon.gezinti.network.EventInteractor;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private BottomSheetBehavior<View> mBottomSheetBehavior;
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MapFragment mMapFragment;
     private Button mButtonRefresh;
-    private Spinner mEventsSpinner, mTimesSpinner;
+    //private Spinner mEventsSpinner, mTimesSpinner;
     private EventInteractor mEventInteractor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +91,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetListFragment.getBottomSheetCallback());
 
-//        mBottomSheetListFragment.setEventsForPosition();
+        ArrayList<Event> events = new ArrayList<>();
+        mBottomSheetListFragment.setEventsForPosition(events);
 
         mButtonRefresh = (Button) findViewById(R.id.btn_refresh);
         mButtonRefresh.setOnClickListener(this);
-
+/*
         mEventsSpinner = (Spinner) findViewById(R.id.sp_events);
         ArrayAdapter<CharSequence> eventAdapter = ArrayAdapter
                 .createFromResource(this, R.array.array_event_types,
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         android.R.layout.simple_spinner_item);
         timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTimesSpinner.setAdapter(timeAdapter);
-
+*/
     }
 
     @Override
@@ -119,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 double longitude = latLng.longitude;
                 double latitude = latLng.latitude;
 
-                int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
-                int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
+                //int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
+                //int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
 
                 Log.e("MainAct", "Lat: "+latitude + " Lon: " + longitude);
                 mEventInteractor = new EventInteractor(this);
