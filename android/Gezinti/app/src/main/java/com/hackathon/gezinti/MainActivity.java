@@ -13,7 +13,7 @@ import com.hackathon.gezinti.fragment.MapFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private BottomSheetBehavior<View> mBottomSheetBehavior;
     private BottomSheetListFragment mBottomSheetListFragment;
 
