@@ -10,9 +10,12 @@ module.exports = function(app){
 
   app.route('/api/event')
     .put(eventController.registerEvent)
-    .get(eventController.getEventsByLatLong);
+    .post(eventController.getEventsByLatLong);
 
   app.route('/api/event/:eventId')
-    .put(eventController.joinEvent)
     .get(eventController.getEventById);
+
+  app.route('/api/event/:eventId/:userId')
+    .put(eventController.joinEvent)
+    .delete(eventController.removeUserFromEvent);
 }

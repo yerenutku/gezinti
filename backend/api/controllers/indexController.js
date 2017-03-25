@@ -7,7 +7,7 @@ express = require('express');
 
 //get all users
 exports.getUsers = function(req,res){
-  user.find({}).then(function(users) {
+  user.find({}).exec().then(function(users) {
     res.json(users);
   }).catch(console.error);
 };
@@ -16,7 +16,7 @@ exports.getUsers = function(req,res){
 //patlıyor mu
 exports.registerUser = function(req,res){
   var newUser = new user(req.body);
-  newUser.save().exec().then(function(savedUser){
+  newUser.save().then(function(savedUser){
     res.json(savedUser);
   }).catch(console.error);
 };
