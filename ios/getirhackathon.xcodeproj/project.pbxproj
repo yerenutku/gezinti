@@ -14,7 +14,6 @@
 		413D37861E85997B00082163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 413D37851E85997B00082163 /* Assets.xcassets */; };
 		413D37891E85997B00082163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413D37871E85997B00082163 /* LaunchScreen.storyboard */; };
 		4182E72B1E85B23A00DB6F4E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4182E72A1E85B23A00DB6F4E /* Event.swift */; };
-		4182E72D1E85DB7300DB6F4E /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4182E72C1E85DB7300DB6F4E /* MarkerInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		413D37881E85997B00082163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		413D378A1E85997B00082163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4182E72A1E85B23A00DB6F4E /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		4182E72C1E85DB7300DB6F4E /* MarkerInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
 		A2246B70C22C68C51DC4069A /* Pods-getirhackathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-getirhackathon.release.xcconfig"; path = "getirhackathon/Pods/Target Support Files/Pods-getirhackathon/Pods-getirhackathon.release.xcconfig"; sourceTree = "<group>"; };
 		E48D466E6E944A3D1C23FC3E /* Pods-getirhackathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-getirhackathon.debug.xcconfig"; path = "getirhackathon/Pods/Target Support Files/Pods-getirhackathon/Pods-getirhackathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,7 +74,6 @@
 				413D37821E85997B00082163 /* Main.storyboard */,
 				413D377E1E85997B00082163 /* AppDelegate.swift */,
 				413D37801E85997B00082163 /* MapViewController.swift */,
-				4182E72C1E85DB7300DB6F4E /* MarkerInfoView.swift */,
 				4182E72A1E85B23A00DB6F4E /* Event.swift */,
 				4182E7291E85AC8700DB6F4E /* Supporting Files */,
 			);
@@ -226,7 +223,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4182E72D1E85DB7300DB6F4E /* MarkerInfoView.swift in Sources */,
 				413D37811E85997B00082163 /* MapViewController.swift in Sources */,
 				4182E72B1E85B23A00DB6F4E /* Event.swift in Sources */,
 				413D377F1E85997B00082163 /* AppDelegate.swift in Sources */,

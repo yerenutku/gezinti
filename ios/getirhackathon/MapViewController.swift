@@ -30,6 +30,7 @@ class MapViewController: UIViewController {
         
         let camera = GMSCameraPosition.camera(withLatitude: 0, longitude: 0, zoom: zoomLevel)
         mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
+        mapView.delegate = self
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
@@ -37,10 +38,18 @@ class MapViewController: UIViewController {
         view.addSubview(mapView)
         mapView.isHidden = true
         
-        events.append(Event(latitude: 41.00, longitude: 29.00))
-        events.append(Event(latitude: 41.10, longitude: 29.10))
         
-        pinCurrentEvents()
+        let position = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.127)
+        let marker = GMSMarker(position: position)
+        marker.title = "London"
+        
+        marker.tracksViewChanges = true
+        marker.map = mapView
+        
+//        events.append(Event(latitude: 41.00, longitude: 29.00))
+//        events.append(Event(latitude: 41.10, longitude: 29.10))
+        
+//        pinCurrentEvents()
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,7 +109,17 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("touched \(marker.title)")
+        
+        let infoWindow = UIView(frame: CGRect(x: 0, y: view.bounds.height - 100, width: view.bounds.width, height: 100))
+        
+        infoWindow.backgroundColor = .white
+        view.addSubview(infoWindow)
         return true
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap overlay: GMSOverlay) {
+        print("deneme")
     }
 }
 
