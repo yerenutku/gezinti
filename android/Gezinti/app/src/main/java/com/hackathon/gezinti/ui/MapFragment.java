@@ -45,33 +45,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     /*  Required for Google Maps  */
     private MapView mapView;
     private GoogleMap googleMap;
-
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    private Marker mCurrLocationMarker;
+    private LocationRequest mLocationRequest;
 
     private boolean getLocation = true;
 
     private static final String[] FINE_LOCATION={
             Manifest.permission.ACCESS_FINE_LOCATION
     };
-    private int MY_LOCATION_REQUEST_CODE = 0001;
+
+    private final int MY_LOCATION_REQUEST_CODE = 0001;
 
     public MapFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-
     }
 
     @Override
@@ -131,7 +119,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                FINE_LOCATION[0])
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
@@ -147,11 +135,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        /*
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = googleMap.addMarker(markerOptions);
+        */
 
         //move map camera
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -220,15 +211,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                FINE_LOCATION[0])
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    FINE_LOCATION[0])) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -236,15 +226,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
                 //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+                        FINE_LOCATION,
+                        MY_LOCATION_REQUEST_CODE);
 
 
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+                        FINE_LOCATION,
+                        MY_LOCATION_REQUEST_CODE);
             }
             return false;
         } else {
@@ -256,7 +246,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
+            case MY_LOCATION_REQUEST_CODE: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -264,7 +254,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     // permission was granted. Do the
                     // contacts-related task you need to do.
                     if (ContextCompat.checkSelfPermission(getActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            FINE_LOCATION[0])
                             == PackageManager.PERMISSION_GRANTED) {
 
                         if (mGoogleApiClient == null) {
