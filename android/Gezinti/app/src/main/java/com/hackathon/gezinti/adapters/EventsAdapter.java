@@ -13,7 +13,6 @@ import com.hackathon.gezinti.models.EventResponse;
 
 import java.util.List;
 
-// temp adapter
 public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<EventResponse> mEventResponseList;
@@ -59,6 +58,10 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return mEventResponseList.size() + 1;
     }
 
+    public void setItems(List<EventResponse> eventResponseList){
+        mEventResponseList = eventResponseList;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvText;
@@ -93,5 +96,3 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return super.getItemViewType(position);
     }
 }
-
-

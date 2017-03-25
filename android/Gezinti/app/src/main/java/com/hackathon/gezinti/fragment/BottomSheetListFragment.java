@@ -1,6 +1,5 @@
 package com.hackathon.gezinti.fragment;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -17,25 +16,23 @@ import com.hackathon.gezinti.models.EventResponse;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class BottomSheetListFragment extends Fragment {
 
     private View mDimBackground;
     private EventsAdapter mEventsAdapter;
     private RecyclerView mRecyclerView;
 
+    private List<EventResponse> mEventResponseList;
+
     public BottomSheetListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view  = inflater.inflate(R.layout.fragment_bottom_sheet_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_bottom_sheet_list, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvEvents);
         return view;
     }
@@ -48,12 +45,18 @@ public class BottomSheetListFragment extends Fragment {
     public BottomSheetBehavior.BottomSheetCallback getBottomSheetCallback() {
         return bottomSheetCallback;
     }
-    public void setEventsForPosition(List<EventResponse> eventResponseList){
-        mEventsAdapter = new EventsAdapter(eventResponseList,getContext());
+
+    public void setEventsForPosition(List<EventResponse> eventResponseList) {
+        mEventResponseList = eventResponseList;
+        mEventsAdapter = new EventsAdapter(mEventResponseList, getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mEventsAdapter);
     }
 
+    public void refreshEvents(List<EventResponse> eventResponseList) {
+        mEventsAdapter.setItems(eventResponseList);
+        mEventsAdapter.notifyDataSetChanged();
+    }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
 

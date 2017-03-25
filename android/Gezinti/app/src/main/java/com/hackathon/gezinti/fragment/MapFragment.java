@@ -27,10 +27,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hackathon.gezinti.R;
+import com.hackathon.gezinti.models.EventResponse;
+
+import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+        LocationListener, GoogleMap.OnMarkerClickListener{
 
     /*  Required for Google Maps  */
     private MapView mapView;
@@ -45,7 +48,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private static final String[] FINE_LOCATION={
             Manifest.permission.ACCESS_FINE_LOCATION
     };
-
     private final int MY_LOCATION_REQUEST_CODE = 0001;
 
     public MapFragment() {
@@ -93,6 +95,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         makeRequestAndPin();
     }
 
+
+
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .addConnectionCallbacks(this)
@@ -123,16 +127,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             mCurrLocationMarker.remove();
         }
 
-        //Place current location marker
+        //Focus current location
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        /*
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = googleMap.addMarker(markerOptions);
-        */
 
         //move map camera
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -144,6 +140,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    public void getEventsAndPin(List<EventResponse> eventResponseList){
+        this.googleMap.clear();
+        for(EventResponse item : eventResponseList){
+            this.googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(item.getLatitude(), item.getLongitude()))
+                    .title(item.getText())
+            );
+        }
+    }
+
+    public LatLng getCenterOfScreen(){
+        return this.googleMap.getCameraPosition().target;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        return false;
+    }
+
+
+    //deprecated
     public void makeRequestAndPin(){
 
         if (getLocation) {
@@ -164,40 +182,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     .title("Test - 4"));
         }
         getLocation = !getLocation;
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(mapView != null) mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(mapView != null) mapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(mapView != null) mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        if(mapView != null) mapView.onLowMemory();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
@@ -265,4 +249,39 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             // You can add here other case statements according to your requirement.
         }
     }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mapView != null) mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mapView != null) mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mapView != null) mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if(mapView != null) mapView.onLowMemory();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
 }
