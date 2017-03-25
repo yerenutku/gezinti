@@ -3,7 +3,6 @@
 
     <string name="activity_main_button_refresh">Search Area</string>
 
-    <string name="text_getir_button">GETİR</string>
     <string name="error_msg_reason">"Reason: "</string>
     <string name="error_msg_general_title">"Error"</string>
     <string name="error_msg_timeout">Connection Timeout or No Connection</string>
@@ -12,4 +11,20 @@
     <string name="error_msg_network">Network Error</string>
     <string name="error_msg_parse">Parse Error</string>
     <string name="error_msg_btn_txt">Ok</string>
+
+    <string-array name="array_event_types">
+        <item>Choices</item>
+        <item>Dinner</item>
+        <item>Drinkin</item>
+        <item>Netflix and Chill</item>
+        <item>Tour</item>
+    </string-array>
+
+    <string-array name="array_event_times">
+        <item>Choices</item>
+        <item>Mornin</item>
+        <item>Noon</item>
+        <item>Nightss</item>
+        <item>Dark Knights</item>
+    </string-array>
 </resources>

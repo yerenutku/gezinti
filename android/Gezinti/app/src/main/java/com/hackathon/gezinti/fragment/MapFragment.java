@@ -1,6 +1,7 @@
 package com.hackathon.gezinti.fragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +28,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.hackathon.gezinti.EventDetailActivity;
+import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
+import com.hackathon.gezinti.models.EventResponse;
+
+import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+        LocationListener, GoogleMap.OnInfoWindowClickListener{
 
     /*  Required for Google Maps  */
     private MapView mapView;
@@ -40,12 +47,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private Marker mCurrLocationMarker;
     private LocationRequest mLocationRequest;
 
+    private List<EventResponse> mEventResponseList;
     private boolean getLocation = true;
 
     private static final String[] FINE_LOCATION={
             Manifest.permission.ACCESS_FINE_LOCATION
     };
-
     private final int MY_LOCATION_REQUEST_CODE = 0001;
 
     public MapFragment() {
@@ -90,6 +97,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             googleMap.setMyLocationEnabled(true);
         }
 
+        this.googleMap.setOnInfoWindowClickListener(this);
         makeRequestAndPin();
     }
 
@@ -123,16 +131,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             mCurrLocationMarker.remove();
         }
 
-        //Place current location marker
+        //Focus current location
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        /*
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = googleMap.addMarker(markerOptions);
-        */
 
         //move map camera
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -144,6 +144,45 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    public void getEventsAndPin(List<EventResponse> eventResponseList){
+        mEventResponseList = eventResponseList;
+        this.googleMap.clear();
+        Marker marker;
+
+        int count = 0;
+        for(EventResponse item : eventResponseList){
+            marker = this.googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(item.getLatitude(), item.getLongitude()))
+                    .title(item.getText())
+            );
+            marker.setTag(count);
+            count++;
+        }
+    }
+
+    public LatLng getCenterOfScreen(){
+        return this.googleMap.getCameraPosition().target;
+    }
+
+    public void moveMapsCamera(LatLng latLng){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Log.d("MapFragment", marker.getTag().toString());
+        mEventResponseList.get((int) marker.getTag());
+
+        //goto eventdetailactivity
+        Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("EventDetail", mEventResponseList.get((int) marker.getTag()));
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    //deprecated
     public void makeRequestAndPin(){
 
         if (getLocation) {
@@ -164,40 +203,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     .title("Test - 4"));
         }
         getLocation = !getLocation;
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(mapView != null) mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(mapView != null) mapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(mapView != null) mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        if(mapView != null) mapView.onLowMemory();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
@@ -265,4 +270,39 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             // You can add here other case statements according to your requirement.
         }
     }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mapView != null) mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mapView != null) mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mapView != null) mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if(mapView != null) mapView.onLowMemory();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
 }
