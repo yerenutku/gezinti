@@ -4,6 +4,10 @@ public class EventResponse {
 
     private String text;
 
+    public EventResponse(String text) {
+        this.text = text;
+    }
+
     public String getText() {
         return text;
     }

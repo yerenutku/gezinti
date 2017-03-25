@@ -3,12 +3,16 @@ package com.hackathon.gezinti;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.hackathon.gezinti.fragment.BottomSheetListFragment;
+import com.hackathon.gezinti.models.EventResponse;
 import com.hackathon.gezinti.ui.MapFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private BottomSheetBehavior<View> mBottomSheetBehavior;
@@ -38,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
         mBottomSheetBehavior  = BottomSheetBehavior.from(findViewById(R.id.fragmentBottomSheet));
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetListFragment.getBottomSheetCallback());
+        List<EventResponse> eventResponseList = new ArrayList<>();
+        eventResponseList.add(new EventResponse("eren"));
+        eventResponseList.add(new EventResponse("ceren"));
+        eventResponseList.add(new EventResponse("deren"));
+        eventResponseList.add(new EventResponse("reren"));
+        eventResponseList.add(new EventResponse("teren"));
+        eventResponseList.add(new EventResponse("yeren"));
+        eventResponseList.add(new EventResponse("keren"));
+        eventResponseList.add(new EventResponse("peren"));
+        mBottomSheetListFragment.setEventsForPosition(eventResponseList);
+
     }
 
     @Override
