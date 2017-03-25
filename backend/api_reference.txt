@@ -1,36 +1,32 @@
-api/user ---------------------------------------------------------
-
-      PUT -------- returns created user
-        name: String,
-        password: String
-
-      GET -------- returns all users
-
-api/user/:userId
-
-      GET ------- returns selectedUser
-
-api/event
-      create event
-      PUT ------- returns created event
-        title: String,
-        owner: String (id of user creates event),
-        desc: String,
-        time: Date (format: 2016-05-18T16:00:00Z),
-        coordinates: [lat,long]
-
-      search for events in a coordinate and range
-      POST ------- returns event matches search by range
-        lat: double,
-        long: double
-
-api/event/:eventId
-      get event by eventId
-      GET ------- returns event according to eventId
-
-api/event/:eventId/:userId
-      add user to event
-      PUT ------- returns updated event
-
-      delete user from event
-      DELETE ------- returns updated event
+api port :9999
+------------------------------------------------------------------------------------------------------------------
+/api/user/:userId/select POST
+  userId: id
+------------------------------------------------------------------------------------------------------------------
+/api/user/register, POST, returns: created user
+  name: String,
+  password: String
+------------------------------------------------------------------------------------------------------------------
+api/user, GET, returns: all users
+------------------------------------------------------------------------------------------------------------------
+api/user/:userId, GET, returns: specified user with profile data
+------------------------------------------------------------------------------------------------------------------
+/api/event/register, POST, returns: created event
+  title: String,
+  owner: String (id of user creates event),
+  desc: String,
+  time: Date (format: 2016-05-18T16:00:00Z),
+  coordinates: [lat,long]
+------------------------------------------------------------------------------------------------------------------
+api/event/search, POST, returns: list of found events
+  lat: double,
+  long: double
+------------------------------------------------------------------------------------------------------------------
+/api/event/:eventId', GET, returns: selected event
+------------------------------------------------------------------------------------------------------------------
+/api/event/:eventId/remove, POST, returns: 'deleted' or error
+------------------------------------------------------------------------------------------------------------------
+/api/event/:eventId/:userId/join, POST, returns: adds user to event
+------------------------------------------------------------------------------------------------------------------
+/api/event/:eventId/:userId/remove, POST, returns: 'deleted or error'
+------------------------------------------------------------------------------------------------------------------

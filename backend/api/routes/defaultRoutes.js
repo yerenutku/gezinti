@@ -8,12 +8,14 @@ module.exports = function(app){
     .put(indexController.registerUser)
     .get(indexController.getUsers);
 
-  app.route('/api/event')
-    .put(eventController.registerEvent)
+  app.route('/api/event/register')
+    .post(eventController.registerEvent);
+  app.route('api/event/serach')
     .post(eventController.getEventsByLatLong);
 
   app.route('/api/event/:eventId')
-    .get(eventController.getEventById);
+    .get(eventController.getEventById)
+    .delete(eventController.removeEvent);
 
   app.route('/api/event/:eventId/:userId')
     .put(eventController.joinEvent)
