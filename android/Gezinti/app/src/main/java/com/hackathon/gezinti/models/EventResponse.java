@@ -1,6 +1,8 @@
 package com.hackathon.gezinti.models;
 
-public class EventResponse {
+import java.io.Serializable;
+
+public class EventResponse implements Serializable{
 
     private String text;
     private double longitude, latitude;

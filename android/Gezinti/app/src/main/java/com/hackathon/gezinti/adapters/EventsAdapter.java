@@ -13,7 +13,7 @@ import com.hackathon.gezinti.models.EventResponse;
 
 import java.util.List;
 
-public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<EventResponse> mEventResponseList;
     private Context mContext;

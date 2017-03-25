@@ -1,5 +1,6 @@
 package com.hackathon.gezinti.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -10,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hackathon.gezinti.EventCreationActivity;
+import com.hackathon.gezinti.EventDetailActivity;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.adapters.EventsAdapter;
 import com.hackathon.gezinti.models.EventResponse;
+import com.hackathon.gezinti.utils.RecyclerItemListener;
 
 import java.util.List;
 
@@ -34,6 +38,24 @@ public class BottomSheetListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bottom_sheet_list, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvEvents);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemListener(getContext(), mRecyclerView,
+                new RecyclerItemListener.RecyclerTouchListener() {
+            @Override
+            public void onClickItem(View v, int position) {
+                if(mEventResponseList.size() == position){
+                    //create
+                    Intent intent = new Intent(getActivity(), EventCreationActivity.class);
+                    startActivity(intent);
+                } else {
+                    //list.get(position) için olan modeli yeni activity gönder
+                    Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("EventDetail", mEventResponseList.get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            }
+        }));
         return view;
     }
 
@@ -54,6 +76,7 @@ public class BottomSheetListFragment extends Fragment {
     }
 
     public void refreshEvents(List<EventResponse> eventResponseList) {
+        mEventResponseList = eventResponseList;
         mEventsAdapter.setItems(eventResponseList);
         mEventsAdapter.notifyDataSetChanged();
     }
