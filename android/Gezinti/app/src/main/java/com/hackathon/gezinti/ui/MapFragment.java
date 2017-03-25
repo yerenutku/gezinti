@@ -1,10 +1,16 @@
 package com.hackathon.gezinti.ui;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,8 +25,13 @@ import com.hackathon.gezinti.R;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     /*  Required for Google Maps  */
-    MapView mapView;
-    GoogleMap googleMap;
+    private MapView mapView;
+    private GoogleMap googleMap;
+
+    private static final String[] FINE_LOCATION={
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+    private int MY_LOCATION_REQUEST_CODE = 0001;
 
     public MapFragment() {
         // Required empty public constructor
@@ -38,10 +49,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
-        this.googleMap.getUiSettings().setZoomControlsEnabled(true);
-        this.googleMap.getUiSettings().setZoomGesturesEnabled(true);
+    public void onMapReady(GoogleMap map) {
+        googleMap = map;
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomGesturesEnabled(true);
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), FINE_LOCATION, MY_LOCATION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == MY_LOCATION_REQUEST_CODE) {
+            if (permissions.length == 1 &&
+                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                try {
+                    googleMap.setMyLocationEnabled(true);
+                }catch (SecurityException se){
+                    Log.d(getActivity().getPackageName(), se.getMessage());
+                }
+            } else {
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void experimental(){
