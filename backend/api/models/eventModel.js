@@ -19,14 +19,6 @@ var eventSchema = new schema({
     type: Date,
     required: 'Time is required'
   },
-  lat:{
-    type: String,
-    required: 'Address lat is required'
-  },
-  long:{
-    type: String,
-    required: 'Address long is required'
-  },
   owner:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
@@ -35,6 +27,10 @@ var eventSchema = new schema({
   members:{
     type: Array,
     default: []
+  },
+  coordinates:{
+    type: [Number],
+    index: '2dsphere'
   }
 });
 
