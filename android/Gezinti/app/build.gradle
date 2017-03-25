@@ -13,11 +13,11 @@ android {
     }
     buildTypes {
         debug {
-            resValue "string", "google_maps_api_key", "AIzaSyCVGinB4saJOgBXHERnVC8FC9kHB-tUgHA"
+            resValue "string", "google_maps_api_key", "AIzaSyAuyyzoWKxA6JkP8hmnRYgcrSViwBkBwAY"
             buildConfigField "String", "BASE_URL", '"http://192.168.88.63:9999"'
         }
         release {
-            resValue "string", "google_maps_api_key", "AIzaSyCVGinB4saJOgBXHERnVC8FC9kHB-tUgHA"
+            resValue "string", "google_maps_api_key", "AIzaSyAuyyzoWKxA6JkP8hmnRYgcrSViwBkBwAY"
             buildConfigField "String", "BASE_URL", '"http://192.168.88.63:9999"'
         }
     }
