@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2BCEFA7172D571057D1FC32D /* libPods-getirhackathon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236E9F146D8985DE76B4708C /* libPods-getirhackathon.a */; };
+		413D377F1E85997B00082163 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413D377E1E85997B00082163 /* AppDelegate.swift */; };
+		413D37811E85997B00082163 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413D37801E85997B00082163 /* MapViewController.swift */; };
+		413D37841E85997B00082163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413D37821E85997B00082163 /* Main.storyboard */; };
+		413D37861E85997B00082163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 413D37851E85997B00082163 /* Assets.xcassets */; };
+		413D37891E85997B00082163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413D37871E85997B00082163 /* LaunchScreen.storyboard */; };
+		4182E72B1E85B23A00DB6F4E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4182E72A1E85B23A00DB6F4E /* Event.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		236E9F146D8985DE76B4708C /* libPods-getirhackathon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-getirhackathon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		413D377B1E85997B00082163 /* getirhackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = getirhackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		413D377E1E85997B00082163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		413D37801E85997B00082163 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		413D37831E85997B00082163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		413D37851E85997B00082163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		413D37881E85997B00082163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		413D378A1E85997B00082163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4182E72A1E85B23A00DB6F4E /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		A2246B70C22C68C51DC4069A /* Pods-getirhackathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-getirhackathon.release.xcconfig"; path = "getirhackathon/Pods/Target Support Files/Pods-getirhackathon/Pods-getirhackathon.release.xcconfig"; sourceTree = "<group>"; };
+		E48D466E6E944A3D1C23FC3E /* Pods-getirhackathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-getirhackathon.debug.xcconfig"; path = "getirhackathon/Pods/Target Support Files/Pods-getirhackathon/Pods-getirhackathon.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		413D37781E85997B00082163 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BCEFA7172D571057D1FC32D /* libPods-getirhackathon.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3CF907677E77863F864056E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				236E9F146D8985DE76B4708C /* libPods-getirhackathon.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		413D37721E85997B00082163 = {
+			isa = PBXGroup;
+			children = (
+				413D377D1E85997B00082163 /* getirhackathon */,
+				413D377C1E85997B00082163 /* Products */,
+				4AE35FD71A5093B3BF11849D /* Pods */,
+				3CF907677E77863F864056E8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		413D377C1E85997B00082163 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				413D377B1E85997B00082163 /* getirhackathon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		413D377D1E85997B00082163 /* getirhackathon */ = {
+			isa = PBXGroup;
+			children = (
+				413D37821E85997B00082163 /* Main.storyboard */,
+				413D377E1E85997B00082163 /* AppDelegate.swift */,
+				413D37801E85997B00082163 /* MapViewController.swift */,
+				4182E72A1E85B23A00DB6F4E /* Event.swift */,
+				4182E7291E85AC8700DB6F4E /* Supporting Files */,
+			);
+			path = getirhackathon;
+			sourceTree = "<group>";
+		};
+		4182E7291E85AC8700DB6F4E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				413D37851E85997B00082163 /* Assets.xcassets */,
+				413D37871E85997B00082163 /* LaunchScreen.storyboard */,
+				413D378A1E85997B00082163 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4AE35FD71A5093B3BF11849D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E48D466E6E944A3D1C23FC3E /* Pods-getirhackathon.debug.xcconfig */,
+				A2246B70C22C68C51DC4069A /* Pods-getirhackathon.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		413D377A1E85997B00082163 /* getirhackathon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 413D378D1E85997B00082163 /* Build configuration list for PBXNativeTarget "getirhackathon" */;
+			buildPhases = (
+				EF19F9BFD9C678E7CC412D7A /* [CP] Check Pods Manifest.lock */,
+				413D37771E85997B00082163 /* Sources */,
+				413D37781E85997B00082163 /* Frameworks */,
+				413D37791E85997B00082163 /* Resources */,
+				95BC18C410B525D920C14FB4 /* [CP] Embed Pods Frameworks */,
+				A592EFAA5AA1EE8DB334F55D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = getirhackathon;
+			productName = getirhackathon;
+			productReference = 413D377B1E85997B00082163 /* getirhackathon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		413D37731E85997B00082163 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Mert Aközcan";
+				TargetAttributes = {
+					413D377A1E85997B00082163 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 55A392DGS2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 413D37761E85997B00082163 /* Build configuration list for PBXProject "getirhackathon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 413D37721E85997B00082163;
+			productRefGroup = 413D377C1E85997B00082163 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				413D377A1E85997B00082163 /* getirhackathon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		413D37791E85997B00082163 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				413D37891E85997B00082163 /* LaunchScreen.storyboard in Resources */,
+				413D37861E85997B00082163 /* Assets.xcassets in Resources */,
+				413D37841E85997B00082163 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		95BC18C410B525D920C14FB4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/getirhackathon/Pods/Target Support Files/Pods-getirhackathon/Pods-getirhackathon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A592EFAA5AA1EE8DB334F55D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/getirhackathon/Pods/Target Support Files/Pods-getirhackathon/Pods-getirhackathon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF19F9BFD9C678E7CC412D7A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		413D37771E85997B00082163 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				413D37811E85997B00082163 /* MapViewController.swift in Sources */,
+				4182E72B1E85B23A00DB6F4E /* Event.swift in Sources */,
+				413D377F1E85997B00082163 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		413D37821E85997B00082163 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				413D37831E85997B00082163 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		413D37871E85997B00082163 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				413D37881E85997B00082163 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		413D378B1E85997B00082163 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		413D378C1E85997B00082163 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		413D378E1E85997B00082163 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E48D466E6E944A3D1C23FC3E /* Pods-getirhackathon.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 55A392DGS2;
+				INFOPLIST_FILE = getirhackathon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mert.getirhackathon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		413D378F1E85997B00082163 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2246B70C22C68C51DC4069A /* Pods-getirhackathon.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 55A392DGS2;
+				INFOPLIST_FILE = getirhackathon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mert.getirhackathon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		413D37761E85997B00082163 /* Build configuration list for PBXProject "getirhackathon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				413D378B1E85997B00082163 /* Debug */,
+				413D378C1E85997B00082163 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		413D378D1E85997B00082163 /* Build configuration list for PBXNativeTarget "getirhackathon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				413D378E1E85997B00082163 /* Debug */,
+				413D378F1E85997B00082163 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 413D37731E85997B00082163 /* Project object */;
+}
