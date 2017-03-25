@@ -16,6 +16,8 @@ class MapViewController: UIViewController {
     var mapView: GMSMapView!
     var zoomLevel: Float = 10.0
     
+    var summaryWindow: UIView!
+    
     var events = [Event]()
     
     override func viewDidLoad() {
@@ -38,28 +40,23 @@ class MapViewController: UIViewController {
         view.addSubview(mapView)
         mapView.isHidden = true
         
+        events.append(Event(latitude: 41.00, longitude: 29.00, eventTitle: "Deneme 1", description: "Desc 1", dateAndTime: "01.01.2017"))
+        events.append(Event(latitude: 41.10, longitude: 29.10, eventTitle: "Deneme 2", description: "Desc 2", dateAndTime: "01.02.2017"))
         
-        let position = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.127)
-        let marker = GMSMarker(position: position)
-        marker.title = "London"
-        
-        marker.tracksViewChanges = true
-        marker.map = mapView
-        
-//        events.append(Event(latitude: 41.00, longitude: 29.00))
-//        events.append(Event(latitude: 41.10, longitude: 29.10))
-        
-//        pinCurrentEvents()
+        pinCurrentEvents()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    func showEventDetail(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "Show Event Detail From Summary", sender: self)
     }
     
     func pinCurrentEvents() {
         for event in events {
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2D(latitude: event.position.latitude, longitude: event.position.longitude)
+            marker.title = event.title
+            marker.snippet = event.description + "||" + event.dateAndTime
+            marker.tracksViewChanges = true
             marker.map = mapView
         }
     }
@@ -109,17 +106,26 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        print("touched \(marker.title)")
-        
-        let infoWindow = UIView(frame: CGRect(x: 0, y: view.bounds.height - 100, width: view.bounds.width, height: 100))
-        
-        infoWindow.backgroundColor = .white
-        view.addSubview(infoWindow)
+        summaryWindow = UIView(frame: CGRect(x: 0, y: view.bounds.height - 100, width: view.bounds.width, height: 100))
+        summaryWindow.backgroundColor = .white
+        view.addSubview(summaryWindow)
+        let tapGestureRec = UITapGestureRecognizer(target: self, action: #selector (self.showEventDetail(_:)))
+        summaryWindow.addGestureRecognizer(tapGestureRec)
+        let controller = storyboard?.instantiateViewController(withIdentifier: "Event Detail Controller")
+        if let eventDetailTableViewController = controller as? EventDetailTableViewController {
+            var data = marker.snippet!.components(separatedBy: "||")
+            eventDetailTableViewController.event = Event(latitude: marker.position.latitude, longitude: marker.position.longitude, eventTitle: marker.title!, description: data[0],dateAndTime: data[1])
+        }
         return true
     }
     
-    func mapView(_ mapView: GMSMapView, didTap overlay: GMSOverlay) {
-        print("deneme")
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        let lastSubview = view.subviews.last
+        lastSubview?.removeFromSuperview()
     }
+    
+    func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
+        print("djfnelwkf")
+    }
+    
 }
-
