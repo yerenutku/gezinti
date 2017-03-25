@@ -11,7 +11,7 @@ module.exports = function(app){
     .get(indexController.getUsers);
   app.route('/api/event/register')
     .post(eventController.registerEvent);
-  app.route('api/event/search')
+  app.route('/api/event/search')
     .post(eventController.getEventsByLatLong);
   app.route('/api/event/:eventId')
     .get(eventController.getEventById);

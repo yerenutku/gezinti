@@ -28,14 +28,15 @@ var eventSchema = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
   }],
-  coordinates:{
-    type: [Number],
-    index: '2dsphere'
-  },
-  messages:{
-    type: Array,
-    default: []
-  }
+  location:[{
+    lat : String,
+    lon : String,
+    _id: false
+     }],
+  messages:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'messages'
+  }]
 });
 
 module.exports = mongoose.model('events', eventSchema);

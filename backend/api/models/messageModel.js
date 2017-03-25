@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
-var eventSchema = new schema({
+var commentSchema = new schema({
   sender:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
@@ -18,4 +18,4 @@ var eventSchema = new schema({
   }
 });
 
-module.exports = mongoose.model('comments', eventSchema);
+module.exports = mongoose.model('comments', commentSchema);
