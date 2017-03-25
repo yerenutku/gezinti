@@ -6,6 +6,7 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 user = require ('./api/models/userModel');
 event = require ('./api/models/eventModel');
+event = require ('./api/models/messageModel');
 
 console.log('Creating Database Connection');
 mongoose.Promise = global.Promise;
