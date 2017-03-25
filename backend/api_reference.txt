@@ -15,7 +15,7 @@ api/user/:userId, GET, returns: specified user with profile data
   title: String,
   owner: String (id of user creates event),
   desc: String,
-  time: Date (format: 2016-05-18T16:00:00Z),
+  time: String (format: 2016-05-18T16:00:00Z),
   coordinates: [lat,long]
 ------------------------------------------------------------------------------------------------------------------
 api/event/search, POST, returns: list of found events
@@ -24,9 +24,31 @@ api/event/search, POST, returns: list of found events
 ------------------------------------------------------------------------------------------------------------------
 /api/event/:eventId', GET, returns: selected event
 ------------------------------------------------------------------------------------------------------------------
+/api/event/:eventId/comment', POST, returns event
+  sender: String  --------- id of user
+  message: String
+/api/event/:eventId/removeComment
+  commentId: String --------- id of comment
+------------------------------------------------------------------------------------------------------------------
 /api/event/:eventId/remove, POST, returns: 'deleted' or error
 ------------------------------------------------------------------------------------------------------------------
 /api/event/:eventId/:userId/join, POST, returns: adds user to event
 ------------------------------------------------------------------------------------------------------------------
 /api/event/:eventId/:userId/remove, POST, returns: 'deleted or error'
 ------------------------------------------------------------------------------------------------------------------
+
+
+event response example
+
+"title": "deneme4",
+"owner": "58d553e3ef54401bec32899d",
+"desc": "Cay icmek gerekli",
+"time": "2016-05-18T16:00:00.000Z",
+"coordinates": [
+  42.788533,
+  29.80611
+],
+"_id": "58d64771d02d460b9064e7d7",
+"messages": [],
+"members": [],
+"createDate": "2017-03-25T10:33:21.035Z"

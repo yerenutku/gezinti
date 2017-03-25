@@ -3,21 +3,26 @@ module.exports = function(app){
   var indexController = require('../controllers/indexController');
   var eventController = require('../controllers/eventController');
 
-  app.route('/api/user')
+  app.route('/api/user/:userId/select')
     .post(indexController.selectUser)
-    .put(indexController.registerUser)
+  app.route('/api/user/register')
+    .post(indexController.registerUser);
+  app.route('api/user')
     .get(indexController.getUsers);
-
   app.route('/api/event/register')
     .post(eventController.registerEvent);
-  app.route('api/event/serach')
+  app.route('api/event/search')
     .post(eventController.getEventsByLatLong);
-
   app.route('/api/event/:eventId')
-    .get(eventController.getEventById)
-    .delete(eventController.removeEvent);
-
-  app.route('/api/event/:eventId/:userId')
-    .put(eventController.joinEvent)
-    .delete(eventController.removeUserFromEvent);
+    .get(eventController.getEventById);
+  app.route('/api/event/:eventId/comment')
+    .post(eventController.commentEvent);
+  app.route('/api/event/:eventId/removeComment')
+    .post(eventController.removeComment);
+  app.route('/api/event/:eventId/remove')
+    .post(eventController.removeEvent);
+  app.route('/api/event/:eventId/:userId/join')
+    .post(eventController.joinEvent);
+  app.route('/api/event/:eventId/:userId/remove')
+    .post(eventController.removeUserFromEvent);
 }

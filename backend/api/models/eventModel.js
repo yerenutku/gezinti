@@ -24,13 +24,17 @@ var eventSchema = new schema({
     ref: 'users',
     Required: 'User is required',
   },
-  members:{
-    type: Array,
-    default: []
-  },
+  members:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users'
+  }],
   coordinates:{
     type: [Number],
     index: '2dsphere'
+  },
+  messages:{
+    type: Array,
+    default: []
   }
 });
 

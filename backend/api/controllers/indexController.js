@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 user = mongoose.model('users'),
 express = require('express');
 
-//get all users
+//get all users 
 exports.getUsers = function(req,res){
   user.find({}).exec().then(function(users) {
     res.json(users);
