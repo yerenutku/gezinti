@@ -5,6 +5,7 @@ port = process.env.PORT || 9999,
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 user = require ('./api/models/userModel');
+event = require ('./api/models/eventModel');
 
 console.log('Creating Database Connection');
 mongoose.Promise = global.Promise;
