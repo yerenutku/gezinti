@@ -13,8 +13,17 @@ class Event {
     
     var position: CLLocationCoordinate2D
     
-    init(latitude: Double, longitude: Double) {
+    var title: String
+    
+    var description: String
+    
+    var dateAndTime: String
+    
+    init(latitude: Double, longitude: Double, eventTitle: String, description: String, dateAndTime: String) {
         position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.title = eventTitle
+        self.description = description
+        self.dateAndTime = dateAndTime
     }
     
 }
