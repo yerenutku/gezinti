@@ -1,34 +1,29 @@
 'use strict';
 
+//declerations
 var mongoose = require('mongoose'),
 user = mongoose.model('users'),
-express = require('express'),
-session = require('express-session');
-var sess;
+express = require('express');
+
+//get all users
 exports.getUsers = function(req,res){
-  user.find({},{_id: 1, name: 1, password: 1}, function(err, users) {
-    if(err)
-      res.send(err);
+  user.find({}).exec().then(function(users) {
     res.json(users);
-  });
+  }).catch(console.error);
 };
 
+//create a new user
+//patlıyor mu
 exports.registerUser = function(req,res){
   var newUser = new user(req.body);
-  newUser.save(function(err,savedUser){
-    if(err)
-      res.send(err);
+  newUser.save().then(function(savedUser){
     res.json(savedUser);
-  });
+  }).catch(console.error);
 };
 
-
+//select a user as active
 exports.selectUser = function(req,res){
-  if(typeof(req.body.userId) == undefined)
-    res.send("userId is required");
-  user.findOne({_id: req.body.userId}, function(err,currentUser){
-    sess = req.session;
-    sess.user = currentUser;
+  user.findOne({_id: req.body.userId}).exec().then(function(){
     res.json(currentUser);
-  });
+  }).catch(console.error);
 };

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Gezinti</string>
+
+    <string name="activity_main_button_refresh">Bu alanı ara</string>
+</resources>
