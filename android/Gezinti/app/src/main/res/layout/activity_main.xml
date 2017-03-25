@@ -12,11 +12,17 @@
         android:layout_height="match_parent"
         tools:context="com.hackathon.gezinti.MainActivity">
 
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/activity_main_button_refresh"/>
+
         <FrameLayout
             android:id="@+id/fl_map_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
 
     </RelativeLayout>
 
