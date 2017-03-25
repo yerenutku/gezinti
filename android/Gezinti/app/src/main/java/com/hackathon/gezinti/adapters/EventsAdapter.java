@@ -9,18 +9,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hackathon.gezinti.R;
-import com.hackathon.gezinti.models.response.EventCreateResponse;
+import com.hackathon.gezinti.models.common.Event;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<EventCreateResponse> mEventCreateResponseList;
+    private ArrayList<Event> mEvents;
     private Context mContext;
     private static final int FOOTER_VIEW = 1;
 
-    public EventsAdapter(List<EventCreateResponse> eventCreateResponseList, Context context) {
-        mEventCreateResponseList = eventCreateResponseList;
+    public EventsAdapter(ArrayList<Event> events, Context context) {
+        mEvents = events;
         mContext = context;
     }
 
@@ -47,19 +47,19 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        if (mEventCreateResponseList == null) {
+        if (mEvents == null) {
             return 0;
         }
-        if (mEventCreateResponseList.size() == 0) {
+        if (mEvents.size() == 0) {
             //Return 1 here to show nothing
             return 1;
         }
         // Add extra view to show the footer view
-        return mEventCreateResponseList.size() + 1;
+        return mEvents.size() + 1;
     }
 
-    public void setItems(List<EventResponse> eventResponseList){
-        mEventResponseList = eventResponseList;
+    public void setItems(ArrayList<Event> events){
+        mEvents = events;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -88,7 +88,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mEventCreateResponseList.size()) {
+        if (position == mEvents.size()) {
             // This is where we'll add footer.
             return FOOTER_VIEW;
         }

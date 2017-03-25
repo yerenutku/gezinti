@@ -15,11 +15,10 @@ import com.hackathon.gezinti.EventCreationActivity;
 import com.hackathon.gezinti.EventDetailActivity;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.adapters.EventsAdapter;
-import com.hackathon.gezinti.models.EventResponse;
+import com.hackathon.gezinti.models.common.Event;
 import com.hackathon.gezinti.utils.RecyclerItemListener;
-import com.hackathon.gezinti.models.response.EventCreateResponse;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class BottomSheetListFragment extends Fragment {
 
@@ -27,7 +26,7 @@ public class BottomSheetListFragment extends Fragment {
     private EventsAdapter mEventsAdapter;
     private RecyclerView mRecyclerView;
 
-    private List<EventResponse> mEventResponseList;
+    private ArrayList<Event> mEvents;
 
     public BottomSheetListFragment() {
         // Required empty public constructor
@@ -43,7 +42,7 @@ public class BottomSheetListFragment extends Fragment {
                 new RecyclerItemListener.RecyclerTouchListener() {
             @Override
             public void onClickItem(View v, int position) {
-                if(mEventResponseList.size() == position){
+                if(mEvents.size() == position){
                     //create
                     Intent intent = new Intent(getActivity(), EventCreationActivity.class);
                     startActivity(intent);
@@ -51,7 +50,7 @@ public class BottomSheetListFragment extends Fragment {
                     //list.get(position) için olan modeli yeni activity gönder
                     Intent intent = new Intent(getActivity(), EventDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("EventDetail", mEventResponseList.get(position));
+                    bundle.putSerializable("EventDetail", mEvents.get(position));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -69,16 +68,16 @@ public class BottomSheetListFragment extends Fragment {
         return bottomSheetCallback;
     }
 
-    public void setEventsForPosition(List<EventResponse> eventResponseList) {
-        mEventResponseList = eventResponseList;
-        mEventsAdapter = new EventsAdapter(mEventResponseList, getContext());
+    public void setEventsForPosition(ArrayList<Event> events) {
+        mEvents = events;
+        mEventsAdapter = new EventsAdapter(mEvents, getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mEventsAdapter);
     }
 
-    public void refreshEvents(List<EventResponse> eventResponseList) {
-        mEventResponseList = eventResponseList;
-        mEventsAdapter.setItems(eventResponseList);
+    public void refreshEvents(ArrayList<Event> events) {
+        mEvents = events;
+        mEventsAdapter.setItems(events);
         mEventsAdapter.notifyDataSetChanged();
     }
 

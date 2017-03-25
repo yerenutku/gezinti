@@ -29,15 +29,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hackathon.gezinti.EventDetailActivity;
-import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
-import com.hackathon.gezinti.models.EventResponse;
+import com.hackathon.gezinti.models.common.Event;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, GoogleMap.OnInfoWindowClickListener{
+        LocationListener, GoogleMap.OnInfoWindowClickListener {
 
     /*  Required for Google Maps  */
     private MapView mapView;
@@ -47,10 +46,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private Marker mCurrLocationMarker;
     private LocationRequest mLocationRequest;
 
-    private List<EventResponse> mEventResponseList;
+    private ArrayList<Event> mEvents;
     private boolean getLocation = true;
 
-    private static final String[] FINE_LOCATION={
+    private static final String[] FINE_LOCATION = {
             Manifest.permission.ACCESS_FINE_LOCATION
     };
     private final int MY_LOCATION_REQUEST_CODE = 0001;
@@ -91,8 +90,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             } else {
                 ActivityCompat.requestPermissions(getActivity(), FINE_LOCATION, MY_LOCATION_REQUEST_CODE);
             }
-        }
-        else {
+        } else {
             buildGoogleApiClient();
             googleMap.setMyLocationEnabled(true);
         }
@@ -144,27 +142,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    public void getEventsAndPin(List<EventResponse> eventResponseList){
-        mEventResponseList = eventResponseList;
+    public void getEventsAndPin(ArrayList<Event> events) {
+        mEvents = events;
         this.googleMap.clear();
         Marker marker;
 
         int count = 0;
-        for(EventResponse item : eventResponseList){
-            marker = this.googleMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(item.getLatitude(), item.getLongitude()))
-                    .title(item.getText())
-            );
-            marker.setTag(count);
-            count++;
+        for (Event item : events) {
+            if (item.getCoordinatesList().size() > 1) {
+
+            } else {
+                marker = this.googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Double.valueOf(item.getCoordinatesList().get(0).getLat()), Double.valueOf(item.getCoordinatesList().get(0).getLon())))
+                        .title(item.getTitle())
+                );
+                marker.setTag(count);
+                count++;
+            }
         }
     }
 
-    public LatLng getCenterOfScreen(){
+    public LatLng getCenterOfScreen() {
         return this.googleMap.getCameraPosition().target;
     }
 
-    public void moveMapsCamera(LatLng latLng){
+    public void moveMapsCamera(LatLng latLng) {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
     }
@@ -172,18 +174,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onInfoWindowClick(Marker marker) {
         Log.d("MapFragment", marker.getTag().toString());
-        mEventResponseList.get((int) marker.getTag());
+        mEvents.get((int) marker.getTag());
 
         //goto eventdetailactivity
         Intent intent = new Intent(getActivity(), EventDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("EventDetail", mEventResponseList.get((int) marker.getTag()));
+        bundle.putSerializable("EventDetail", mEvents.get((int) marker.getTag()));
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
     //deprecated
-    public void makeRequestAndPin(){
+    public void makeRequestAndPin() {
 
         if (getLocation) {
             this.googleMap.clear();
@@ -206,7 +208,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    public boolean checkLocationPermission(){
+    public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(),
                 FINE_LOCATION[0])
                 != PackageManager.PERMISSION_GRANTED) {
@@ -279,25 +281,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onResume() {
         super.onResume();
-        if(mapView != null) mapView.onResume();
+        if (mapView != null) mapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if(mapView != null) mapView.onPause();
+        if (mapView != null) mapView.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mapView != null) mapView.onDestroy();
+        if (mapView != null) mapView.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        if(mapView != null) mapView.onLowMemory();
+        if (mapView != null) mapView.onLowMemory();
     }
 
     @Override
