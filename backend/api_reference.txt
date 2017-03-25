@@ -1,0 +1,29 @@
+api/user ---------------------------------------------------------
+
+      PUT -------- returns created user
+        name: String,
+        password: String
+
+      GET -------- returns all users
+
+api/user/:userId
+
+      GET ------- returns selectedUser
+
+api/event
+
+      PUT ------- returns created event
+        title: String,
+        owner: String (id of user creates event),
+        desc: String,
+        time: Date (format: 2016-05-18T16:00:00Z),
+        lat: String,
+        long: String
+      GET ------- returns event matches search
+        not finished yet
+api/event/:eventId
+
+      PUT ------- returns updated event
+        userId: String
+
+      GET ------- returns event according to eventId
