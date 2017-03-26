@@ -9,12 +9,11 @@ Subfolderlar halinde tüm projeler bu repo içerisinde toplanmıştır.
 - Yasin Arslan
 # İçindekiler
 - [Commit Standartı](#commit-standart)
-- [API Reference](#api-reference)
 - [Backend](#backend)
 - [Frontend](#frontend)
 - [Android](#android)
 
-## Commit Standart
+#### Commit Standart
 `[platform][branch][feature][commit message]`
 şeklindedir. Geliştirme branch'i `dev` branch'idir. Ana branch `master` branch'idir.
 
@@ -83,6 +82,28 @@ Kullanıcı taskları
     -eventType(Number) Event type parameter
     -eventTime(Numver) Event time parameter
  returns: Created event, 405 on bad request, and 500 on internal server error
+
+-Title: Get events by coordinate
+  Endpoint: api/event/search
+  Method: POST
+  Parameters:
+    lat(String) lattitude parameter for search
+    lon(String) longitude parameter for search
+    eventType(Number) Event type parameter
+    eventTime(Number) Event time parameter
+  returns:
+    list of matched events, 4XX on bad request, 5XX on internal server error
+ 
+-Title: Remove event
+ Endpoint: /api/event/:eventId/remove
+ Method: GET
+ returns: 
+    200 if ok
+ parameters: eventId(String) Id of event
+-Title: Join event
+ Endpoint:/api/event/:eventId/:userId/join
+ Method: GET
+
 ## Frontend
 AngularJs ve NodeJs tabanlı single page application geliştirildi.
 #### Teknolojiler;
