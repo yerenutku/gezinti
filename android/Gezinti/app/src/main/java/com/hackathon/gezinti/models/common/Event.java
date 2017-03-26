@@ -3,15 +3,13 @@ package com.hackathon.gezinti.models.common;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.security.acl.Owner;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by yutku on 25/03/17.
  */
 
-public class Event implements Serializable{
+public class Event implements Serializable {
     @SerializedName("_id")
     public String id;
 
@@ -24,8 +22,11 @@ public class Event implements Serializable{
     @SerializedName("desc")
     public String desc;
 
-    @SerializedName("time")
-    public String time;
+    @SerializedName("eventType")
+    public String eventType;
+
+    @SerializedName("eventTime")
+    public String eventTime;
 
     @SerializedName("location")
     public List<Coordinates> mCoordinatesList;
@@ -35,7 +36,6 @@ public class Event implements Serializable{
 
     @SerializedName("createDate")
     public String createDate;
-
 
 
     public String getId() {
@@ -54,12 +54,16 @@ public class Event implements Serializable{
         return desc;
     }
 
-    public String getTime() {
-        return time;
-    }
-
     public List<Coordinates> getCoordinatesList() {
         return mCoordinatesList;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public String getEventTime() {
+        return eventTime;
     }
 
     public List<User> getMembers() {

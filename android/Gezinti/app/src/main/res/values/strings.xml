@@ -18,6 +18,8 @@
     <string name="event_detail_time">"Event time: %s"</string>
     <string name="event_detail_locations">"Event locations: %s"</string>
     <string name="event_detail_members">"Event joined members: %s"</string>
+    <string name="event_detail_eventtime">"Event time: %s"</string>
+    <string name="event_detail_eventtype">"Event type: %s"</string>
     <string name="btn_text_join">Join the event</string>
     <string name="btn_text_leave">Leave the Event</string>
 

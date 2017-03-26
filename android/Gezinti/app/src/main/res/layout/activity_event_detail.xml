@@ -1,62 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.hackathon.gezinti.EventDetailActivity">
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="23sp"/>
+        android:textSize="23sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvOwner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvLocations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvMembers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvEventTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvEventType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
     <Button
         android:id="@+id/btJoin"
-        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/holo_green_light"
-        android:visibility="gone"
-        android:text="@string/btn_text_join"/>
+        android:padding="3dp"
+        android:text="@string/btn_text_join"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/btLeave"
-        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
-        android:padding="3dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/holo_red_light"
-        android:text="@string/btn_text_leave"/>
-
+        android:padding="3dp"
+        android:text="@string/btn_text_leave"
+        android:visibility="gone" />
 
 
 </LinearLayout>
