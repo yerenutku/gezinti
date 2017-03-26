@@ -38,6 +38,44 @@ Kullanıcı taskları
 - Kullanıcı kaydetme
 - Kullanıcının profil bilgisini görüntüleme
 - Kullanıcıyı seçmek
+## API Reference
+-Title: Select user by ID
+ Endpoint: /api/user/:userId/select
+ Type: POST
+ Parameters:
+    - userId(String) Id of user object
+ 
+-Title: Create user
+ Endpoint: /api/user/register
+ Type: POST
+ Parameters:
+    - name(String) Name of user
+    - password(String) Password of user
+    - tel(String) Telephone number of user
+ Response: created user
+
+-Title: Select user
+ Endpoint: /api/user
+ TYPE: GET
+ Response: list of all users
+
+-Title: Get user profile information
+ Endpoint: /api/user/:userId
+ Type: GET
+ Response: user information or 5XX
+
+-Title: Register event
+ Endpoint: /api/event/register
+ Type: POST
+ Parameters:
+    -title(String) Title of event
+    -owner(String) Owner Id of event
+    -desc(String) Event description
+    -members([user]) Users that are joined to event
+    -location([coordinate]) Coordinates that event includes
+    -eventType(Number) Event type parameter
+    -eventTime(Numver) Event time parameter
+ returns: Created event, 405 on bad request, and 500 on internal server error
 ## Frontend
 AngularJs ve NodeJs tabanlı single page application geliştirildi.
 #### Teknolojiler;
