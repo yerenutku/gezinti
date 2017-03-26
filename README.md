@@ -1,15 +1,21 @@
 # gezinti
 Getir &amp; BiTaksi Hackathon
 Bu repo, getir-bitaksi hackathon 2017 süresince gerçekleştirilmiş `Gezinti` ekibinin backend, frontend ve android/ios uygulamalarını içerir.
+Subfolderlar halinde tüm projeler bu repo içerisinde toplanmıştır.
 
 ### Ekip Üyeleri
-- Eren
-- Necil 
-- Mert
-- Yasin
-#### Commit Standartı
+- Eren Utku
+- Necil Albayrak
+- Yasin Arslan
+# İçindekiler
+- [Commit Standartı](#commit-standart)
+- [Backend](#backend)
+- [Frontend](#frontend)
+- [Android](#android)
+
+#### Commit Standart
 `[platform][branch][feature][commit message]`
-şeklindedir. Geliştirme branch'i `dev` branchidir.
+şeklindedir. Geliştirme branch'i `dev` branch'idir. Ana branch `master` branch'idir.
 
 ## Backend
 NodeJs ve MongoDB, ve Mongoose kullanılarak REST API geliştirildi.
@@ -111,6 +117,7 @@ Android hakkındaki gerçekler
 
 Tek class üzerinden gerçekleşir. Jenerik sınıflar ile dönüş response tipi bilinir ve cast edilmesine gerek kalmaz. Request kendi responsunun tipine sahip olur.
 `get` ve `post` methodları birer tane fakat içerisine aldıklarını abstract BaseRequest sayesinde response tipini belirtmek zorunda olur.
+`SuccessListener<T>` şeklinde jenerik bir sınıf alır. Bu sınıf override edilip dönen `onSuccess` methodunun dönüş tipini belirler. 
 Örnek
 ```java
 yourInstance.post("yourUrl", request, new SuccessListener<EventCreateResponse>() {
@@ -138,3 +145,18 @@ Interactor -> servis çağrısı yapar ve sonucu UI'lara interfaceler ile paslar
 #### Kullanıcı etkileşimi
 Ana fonksiyonun harita üzerinde olmasından dolayı, harita açık iken yapılacak etkileşimleri alttan açılan menu şeklinde `BottomSheet` kullanılarak yapıldı.
 Bu sayede kullanıcı haritayı görmek istediğinde UX problemi çekmeden haritaya ulaşabilir, etkileşime geçmek istediğinde haritadan kopmadan devam edebilir.
+
+#### Google Maps & Places
+
+Google Developer Console'dan alınan API_KEY ile uygulamaya Maps ve Places özelliği eklendi.
+
+##### Maps işlemleri;
+- Geçerli konum bulma ve odaklanma
+- Görüntülenen harita ekranında belirli bir alanda arama özelliği
+- Etkinlik türüne göre harita üzerine tek nokta veya poligon olarak görüntüleme
+- Belirlenen arama kriterlerine göre filtreleme ve harita yenileme
+- Etkinlik oluştururken tek veya çoklu konum seçme, çoklu seçimde işlemi geri alma özelliği
+
+##### Places işlemleri;
+- Konum veya mekan arama özelliği
+- Arama sonucu otomatik odaklanma ve etraftaki etkinlikleri görüntüleme
