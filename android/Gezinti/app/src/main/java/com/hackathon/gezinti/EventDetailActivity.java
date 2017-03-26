@@ -126,6 +126,7 @@ public class EventDetailActivity extends AppCompatActivity {
         for (User user : mEvent.getMembers()) {
             if (user.getId().equals(hardcodedUserID)) isJoined = true;
         }
+        if (mEvent.getOwner().getId().equals(hardcodedUserID)) isJoined = true;
         checkButtonsVisibility();
 
     }
