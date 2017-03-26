@@ -15,13 +15,13 @@ android {
         debug {
             resValue "string", "google_maps_api_key", "AIzaSyCejeDxlhqEdK6n051FCDbkMjUl8uROjUA"
             buildConfigField "String", "BASE_URL", '"http://192.168.88.63:9999"'
-            buildConfigField "String", "HardcodedUserId", '"58d6bdb989f42f0544a8721d"'
+            buildConfigField "String", "HardcodedUserId", '"58d6cff97909d41fd4fc6e02"'
 
         }
         release {
             resValue "string", "google_maps_api_key", "AIzaSyCejeDxlhqEdK6n051FCDbkMjUl8uROjUA"
             buildConfigField "String", "BASE_URL", '"http://192.168.88.63:9999"'
-            buildConfigField "String", "HardcodedUserId", '"58d6bdb989f42f0544a8721d"'
+            buildConfigField "String", "HardcodedUserId", '"58d6cff97909d41fd4fc6e02"'
         }
     }
 }
