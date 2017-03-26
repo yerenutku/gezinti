@@ -1,0 +1,29 @@
+body,.inner{
+  height: 100%;
+}
+.map{
+  width:70%;
+  height: 100%;
+  float: left;
+  height: 100% !important;
+}
+.interactive{
+  width: 30%;
+  height: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  float: right;
+  overflow-y: auto;
+  padding-top: 70px;
+  position: relative;
+}
+.button-bottom {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
