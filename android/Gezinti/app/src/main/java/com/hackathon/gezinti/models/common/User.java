@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 
 public class User implements Serializable{
+    @SerializedName("_id")
+    private String id;
     @SerializedName("name")
     private String name;
     @SerializedName("password")
@@ -20,5 +22,9 @@ public class User implements Serializable{
 
     public String getPassword() {
         return password;
+    }
+
+    public String getId() {
+        return id;
     }
 }
