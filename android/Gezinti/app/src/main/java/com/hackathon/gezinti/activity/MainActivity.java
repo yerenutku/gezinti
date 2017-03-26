@@ -1,9 +1,8 @@
-package com.hackathon.gezinti;
+package com.hackathon.gezinti.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +17,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.model.LatLng;
+import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.fragment.BottomSheetListFragment;
 import com.hackathon.gezinti.fragment.MapFragment;
 import com.hackathon.gezinti.interfaces.EventSearchListener;
@@ -28,7 +28,7 @@ import com.hackathon.gezinti.network.EventInteractor;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomSheetListFragment.BottomSheetInteraction{
+public class MainActivity extends BaseActivity implements View.OnClickListener, BottomSheetListFragment.BottomSheetInteraction {
     private BottomSheetBehavior<View> mBottomSheetBehavior;
     private BottomSheetListFragment mBottomSheetListFragment;
 
@@ -45,44 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initViews();
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             mMapFragment = MapFragment.getInstance();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fl_map_container, mMapFragment, "")
                     .commit();
         }
-
-//        EventInteractor interactor = new EventInteractor(this);
-//        EventCreateRequest eventCreateRequest = new EventCreateRequest();
-//        eventCreateRequest.setTitle("eren");
-//        eventCreateRequest.setDesc("açıklama");
-//        eventCreateRequest.setOwner("58d553e3ef54401bec32899d");
-//        eventCreateRequest.setTime("2018-05-18T16:00:00.000Z");
-//        ArrayList<Coordinates> coordinates = new ArrayList<Coordinates>();
-//        coordinates.add(new Coordinates("65.5","56.6"));
-//        coordinates.add(new Coordinates("31.5","32.6"));
-//        eventCreateRequest.setCoordinates(coordinates);
-//        interactor.eventCreate(eventCreateRequest, new EventCreateListener() {
-//            @Override
-//            public void onResponse(EventCreateResponse response) {
-//
-//            }
-//
-//            @Override
-//            public void onError(String errorMessage) {
-//
-//            }
-//
-//            @Override
-//            public void onBeforeRequest() {
-//
-//            }
-//
-//            @Override
-//            public void onAfterRequest() {
-//
-//            }
-//        });
 
 
     }
@@ -90,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         mBottomSheetListFragment = (BottomSheetListFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentBottomSheet);
         mBottomSheetListFragment.setDimBackground(findViewById(R.id.dim_background));
-        mBottomSheetBehavior  = BottomSheetBehavior.from(findViewById(R.id.fragmentBottomSheet));
+        mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.fragmentBottomSheet));
         mBottomSheetBehavior.setHideable(false);
         mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetListFragment.getBottomSheetCallback());
 
@@ -118,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == mButtonRefresh.getId()){
-            if(mMapFragment.isAdded()){
+        if (v.getId() == mButtonRefresh.getId()) {
+            if (mMapFragment.isAdded()) {
                 findNearByEvents();
             }
         }
@@ -134,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
         int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
 
-        Log.e("MainAct", "Lat: "+latitude + " Lon: " + longitude);
+        Log.e("MainAct", "Lat: " + latitude + " Lon: " + longitude);
         mEventInteractor = new EventInteractor(this);
         EventSearchRequest eventSearchRequest = new EventSearchRequest();
         eventSearchRequest.setLat(String.valueOf(latitude));
@@ -150,17 +118,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onError(String errorMessage) {
-
+                showErrorMessage(errorMessage);
             }
 
             @Override
             public void onBeforeRequest() {
-
+                showWaitingDialog();
             }
 
             @Override
             public void onAfterRequest() {
-
+                dismissWaitingDialog();
             }
         });
     }
@@ -173,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_search){
+        if (item.getItemId() == R.id.action_search) {
             try {
                 Intent intent =
                         new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
@@ -193,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.d("MainAct", place.getLatLng().latitude + " " + place.getLatLng().longitude );
+                Log.d("MainAct", place.getLatLng().latitude + " " + place.getLatLng().longitude);
                 mMapFragment.moveMapsCamera(place.getLatLng());
 
                 // TODO: MAKE NETWORK REQUEST - USE getLatLng
@@ -207,8 +175,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // The user canceled the operation.
             }
         }
-        if (requestCode == EVENT_DETAIL_REQUEST_CODE){
-            if (resultCode == RESULT_OK){
+        if (requestCode == EVENT_DETAIL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
                 findNearByEvents();
             }
         }

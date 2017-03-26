@@ -1,19 +1,19 @@
-package com.hackathon.gezinti;
+package com.hackathon.gezinti.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.interfaces.GeneralSuccessListener;
 import com.hackathon.gezinti.models.common.Coordinates;
 import com.hackathon.gezinti.models.common.Event;
 import com.hackathon.gezinti.models.common.User;
 import com.hackathon.gezinti.network.EventInteractor;
 
-public class EventDetailActivity extends AppCompatActivity {
+public class EventDetailActivity extends BaseActivity {
 
     private Event mEvent;
     private TextView tvTitle, tvOwner, tvTel, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
@@ -88,17 +88,17 @@ public class EventDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String errorMessage) {
-
+                        showErrorMessage(errorMessage);
                     }
 
                     @Override
                     public void onBeforeRequest() {
-
+                        showWaitingDialog();
                     }
 
                     @Override
                     public void onAfterRequest() {
-
+                        dismissWaitingDialog();
                     }
                 });
             }
@@ -116,17 +116,17 @@ public class EventDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String errorMessage) {
-
+                        showErrorMessage(errorMessage);
                     }
 
                     @Override
                     public void onBeforeRequest() {
-
+                        showWaitingDialog();
                     }
 
                     @Override
                     public void onAfterRequest() {
-
+                        dismissWaitingDialog();
                     }
                 });
             }
