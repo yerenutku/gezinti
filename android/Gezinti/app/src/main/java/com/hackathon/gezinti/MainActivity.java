@@ -26,7 +26,7 @@ import com.hackathon.gezinti.network.EventInteractor;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomSheetListFragment.BottomSheetInteraction{
     private BottomSheetBehavior<View> mBottomSheetBehavior;
     private BottomSheetListFragment mBottomSheetListFragment;
 
@@ -208,5 +208,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 findNearByEvents();
             }
         }
+    }
+
+    @Override
+    public void onEventCreated() {
+        findNearByEvents();
     }
 }
