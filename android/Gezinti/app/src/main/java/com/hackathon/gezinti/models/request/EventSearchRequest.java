@@ -16,6 +16,10 @@ public class EventSearchRequest extends BaseRequest {
     private String lat;
     @SerializedName("lon")
     private String lon;
+    @SerializedName("eventType")
+    private int eventType;
+    @SerializedName("eventTime")
+    private int eventTime;
 
     public void setLat(String lat) {
         this.lat = lat;
@@ -23,6 +27,14 @@ public class EventSearchRequest extends BaseRequest {
 
     public void setLon(String lon) {
         this.lon = lon;
+    }
+
+    public void setEventType(int eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setEventTime(int eventTime) {
+        this.eventTime = eventTime;
     }
 
     @Override

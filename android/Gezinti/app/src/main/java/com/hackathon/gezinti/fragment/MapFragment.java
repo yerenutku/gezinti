@@ -28,7 +28,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.hackathon.gezinti.EventDetailActivity;
+import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.models.common.Coordinates;
 import com.hackathon.gezinti.models.common.Event;
@@ -105,8 +108,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             googleMap.setMyLocationEnabled(true);
         }
 
-        this.googleMap.setOnInfoWindowClickListener(this);
-        this.googleMap.setOnMapLongClickListener(this);
+        //def camera position
+        LatLng latLng = new LatLng(41.0823884, 29.0191999);
+        moveMapsCamera(latLng);
+
+        googleMap.setOnInfoWindowClickListener(this);
+        googleMap.setOnMapLongClickListener(this);
         makeRequestAndPin();
     }
 
@@ -155,13 +162,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     public void getEventsAndPin(ArrayList<Event> events) {
         mEvents = events;
-        this.googleMap.clear();
+        googleMap.clear();
         Marker marker;
 
         int count = 0;
         for (Event item : events) {
             if (item.getCoordinatesList().size() > 1) {
-
+                Polygon polygon = googleMap.addPolygon(new PolygonOptions()
+                    .addAll(coordinateToLatLng(item.getCoordinatesList()))
+                    .strokeColor(0xFF00AA00)
+                    .fillColor(0x2200FFFF)
+                    .strokeWidth(2)
+                );
+                polygon.setTag(count);
+                count++;
+                polygon.setClickable(true);
+                googleMap.setOnPolygonClickListener(new GoogleMap.OnPolygonClickListener() {
+                    @Override
+                    public void onPolygonClick(Polygon polygon) {
+                        Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("EventDetail", mEvents.get((int) polygon.getTag()));
+                        intent.putExtras(bundle);
+                        getActivity().startActivityForResult(intent, MainActivity.EVENT_DETAIL_REQUEST_CODE);
+                    }
+                });
             } else {
                 marker = this.googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(Double.valueOf(item.getCoordinatesList().get(0).getLat()), Double.valueOf(item.getCoordinatesList().get(0).getLon())))
@@ -174,7 +199,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public LatLng getCenterOfScreen() {
-        return this.googleMap.getCameraPosition().target;
+        return googleMap.getCameraPosition().target;
     }
 
     public void moveMapsCamera(LatLng latLng) {
@@ -192,7 +217,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         Bundle bundle = new Bundle();
         bundle.putSerializable("EventDetail", mEvents.get((int) marker.getTag()));
         intent.putExtras(bundle);
-        startActivity(intent);
+        getActivity().startActivityForResult(intent, MainActivity.EVENT_DETAIL_REQUEST_CODE);
+    }
+
+    public List<LatLng> coordinateToLatLng(List<Coordinates> coordinatesList){
+        List<LatLng> latLngList = new ArrayList<>();
+        LatLng tempLatLng;
+        for(Coordinates item : coordinatesList){
+            tempLatLng = new LatLng(Double.parseDouble(item.getLat()), Double.parseDouble(item.getLon()));
+            latLngList.add(tempLatLng);
+        }
+        return latLngList;
     }
 
 

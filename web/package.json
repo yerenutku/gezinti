@@ -1,0 +1,28 @@
+{
+  "name": "webapplication",
+  "version": "1.0.0",
+  "description": "web application for getir bitaksi heckathon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yerenutku/gezinti.git"
+  },
+  "author": "necil albayrak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yerenutku/gezinti/issues"
+  },
+  "homepage": "https://github.com/yerenutku/gezinti#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jquery": "^3.2.1",
+    "material-design-lite": "^1.3.0",
+    "ngmap": "^1.18.4",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
+}

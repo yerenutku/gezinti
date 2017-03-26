@@ -20,9 +20,6 @@ public class EventCreateRequest extends BaseRequest {
     @SerializedName("desc")
     private String desc;
 
-    @SerializedName("time")
-    private String time;
-
     @SerializedName("eventType")
     private String eventType;
 
@@ -42,10 +39,6 @@ public class EventCreateRequest extends BaseRequest {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public void setCoordinates(ArrayList<Coordinates> coordinates) {

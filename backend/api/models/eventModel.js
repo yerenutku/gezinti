@@ -15,10 +15,6 @@ var eventSchema = new schema({
     type: String,
     required: 'Description is required'
   },
-  time:{
-    type: Date,
-    required: 'Time is required'
-  },
   owner:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',

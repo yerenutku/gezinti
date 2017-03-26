@@ -1,5 +1,6 @@
 package com.hackathon.gezinti.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.hackathon.gezinti.EventDetailActivity;
 import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
@@ -30,7 +30,6 @@ import com.hackathon.gezinti.network.EventInteractor;
 import com.hackathon.gezinti.utils.RecyclerItemListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BottomSheetListFragment extends Fragment implements View.OnClickListener{
 
@@ -43,6 +42,7 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
     private Spinner spEventTypes, spEventTimes;
 
     private MapFragment mMapFragment;
+    private BottomSheetInteraction mInteraction;
 
     private ArrayList<Event> mEvents;
 
@@ -64,7 +64,7 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                     //create
                     eventFormChanger(true);
                 } else {
-                    //list.get(position) için olan modeli yeni activity gönder
+                    //list.get(position) -> detailactivity
                     Intent intent = new Intent(getActivity(), EventDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("EventDetail", mEvents.get(position));
@@ -98,7 +98,10 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
         spEventTimes.setAdapter(timeAdapter);
 
         mMapFragment = MapFragment.getInstance();
-
+        Context context = getContext();
+        if(context instanceof BottomSheetInteraction){
+            mInteraction = (BottomSheetInteraction) context;
+        }
         return view;
     }
 
@@ -146,7 +149,6 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                 eventCreateRequest.setTitle(mEtTitle.getText().toString());
                 eventCreateRequest.setDesc(mEtDesc.getText().toString());
                 eventCreateRequest.setCoordinates(list);
-                eventCreateRequest.setTime("TIME");
                 eventCreateRequest.setEventTime(String.valueOf(spEventTimes.getSelectedItemPosition()));
                 eventCreateRequest.setEventType(String.valueOf(spEventTypes.getSelectedItemPosition()));
                 eventCreateRequest.setOwner("58d6bdb989f42f0544a8721d");
@@ -156,6 +158,7 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                     @Override
                     public void onResponse(EventCreateResponse response) {
                         eventFormChanger(false);
+                        mInteraction.onEventCreated();
                     }
                     @Override
                     public void onError(String errorMessage) {
@@ -195,5 +198,9 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
             }
         }
     };
+
+    public interface BottomSheetInteraction{
+        void onEventCreated();
+    }
 
 }

@@ -18,7 +18,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private Event mEvent;
     private TextView tvTitle, tvOwner, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
     private Button btJoin, btLeave;
-    public static final String hardcodedUserID = "58d6cff97909d41fd4fc6e02";
+    public static final String hardcodedUserID = "58d6bdb989f42f0544a8721d";
     private boolean isJoined = false;
     private EventInteractor mInteractor;
 

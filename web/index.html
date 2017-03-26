@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./node_modules/material-design-lite/material.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+  </head>
+  <body ng-app="mainApp" ng-controller="indexController as vm">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Gezenti</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      </div>
+      <div class="inner">
+        <ng-map class="map" default-style="true" center="{{mapConf.center}}" zoom="10">
+          <marker id='{{shop._id}}' position="{{shop.loc}}"
+            ng-repeat="shop in vm.markers"
+            on-click="vm.showDetail(shop)">
+          </marker>
+
+          <info-window id="foo-iw">
+            <div ng-non-bindable="">
+              <a href="#" ng-click="vm.clicked()">{{vm.shop.title}}</a>
+            </div>
+          </info-window>
+        </ng-map>
+        <div class="interactive">
+          <div ng-show="pageIndex == 0">
+            <h4>Görüntülemek için seçim yapın</h4>
+          </div>
+          <div ng-show="pageIndex == 1">
+            <h4 ng-bind="currentEvent.title"></h4>
+
+            <ul  class="demo-list-item mdl-list">
+              <li class="mdl-list__item"><span class="mdl-list__item-primary-content">Açıklama: {{currentEvent.desc}}</span></p>
+              <li class="mdl-list__item"><span class="mdl-list__item-primary-content">Katılımcılar</span></li>
+              <li class="mdl-list__item" ng-repeat="user in currentEvent.members"><span class="mdl-list__item-primary-content" ng-bind="user.name"></span></li>
+            </ul>
+            <div ng-show="!checkCurrentUser" class="button-bottom">
+              <button ng-click="join()" ng-show="!userJoined" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                katıl
+              </button>
+              <button ng-click="cancel()" ng-show="userJoined" class="mdl-button mdl-js-button mdl-button--raised">
+                Katılmaktan Vazgeç
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGBoor05DSOVvleAnpZNo8-wawc7glR-Q"></script>
+    <script type="text/javascript" src="./node_modules/material-design-lite/material.min.js"></script>
+    <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./node_modules/ngmap/build/scripts/ng-map.min.js"></script>
+    <script type="text/javascript" src="./js/controller.js"></script>
+  </body>
+</html>
