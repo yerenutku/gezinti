@@ -108,8 +108,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             googleMap.setMyLocationEnabled(true);
         }
 
-        this.googleMap.setOnInfoWindowClickListener(this);
-        this.googleMap.setOnMapLongClickListener(this);
+        //def camera position
+        LatLng latLng = new LatLng(41.0823884, 29.0191999);
+        moveMapsCamera(latLng);
+
+        googleMap.setOnInfoWindowClickListener(this);
+        googleMap.setOnMapLongClickListener(this);
         makeRequestAndPin();
     }
 
@@ -158,7 +162,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     public void getEventsAndPin(ArrayList<Event> events) {
         mEvents = events;
-        this.googleMap.clear();
+        googleMap.clear();
         Marker marker;
 
         int count = 0;
@@ -195,7 +199,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public LatLng getCenterOfScreen() {
-        return this.googleMap.getCameraPosition().target;
+        return googleMap.getCameraPosition().target;
     }
 
     public void moveMapsCamera(LatLng latLng) {

@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MapFragment mMapFragment;
     private Button mButtonRefresh;
-    //private Spinner mEventsSpinner, mTimesSpinner;
+    private Spinner mEventsSpinner, mTimesSpinner;
     private EventInteractor mEventInteractor;
     private static int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     public static int EVENT_DETAIL_REQUEST_CODE = 101;
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mButtonRefresh = (Button) findViewById(R.id.btn_refresh);
         mButtonRefresh.setOnClickListener(this);
-/*
+
         mEventsSpinner = (Spinner) findViewById(R.id.sp_events);
         ArrayAdapter<CharSequence> eventAdapter = ArrayAdapter
                 .createFromResource(this, R.array.array_event_types,
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         android.R.layout.simple_spinner_item);
         timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTimesSpinner.setAdapter(timeAdapter);
-*/
+
     }
 
     @Override
@@ -129,14 +131,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         double longitude = latLng.longitude;
         double latitude = latLng.latitude;
 
-        //int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
-        //int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
+        int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
+        int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
 
         Log.e("MainAct", "Lat: "+latitude + " Lon: " + longitude);
         mEventInteractor = new EventInteractor(this);
         EventSearchRequest eventSearchRequest = new EventSearchRequest();
         eventSearchRequest.setLat(String.valueOf(latitude));
         eventSearchRequest.setLon(String.valueOf(longitude));
+        eventSearchRequest.setEventTime(spTimesPosition);
+        eventSearchRequest.setEventType(spEventsPosition);
         mEventInteractor.eventSearch(eventSearchRequest, new EventSearchListener() {
             @Override
             public void onEventSearch(EventSearchResponse response) {

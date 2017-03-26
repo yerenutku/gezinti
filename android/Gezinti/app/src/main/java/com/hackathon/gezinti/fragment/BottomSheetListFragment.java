@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.hackathon.gezinti.EventDetailActivity;
 import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
@@ -31,7 +30,6 @@ import com.hackathon.gezinti.network.EventInteractor;
 import com.hackathon.gezinti.utils.RecyclerItemListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BottomSheetListFragment extends Fragment implements View.OnClickListener{
 
@@ -66,7 +64,7 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                     //create
                     eventFormChanger(true);
                 } else {
-                    //list.get(position) için olan modeli yeni activity gönder
+                    //list.get(position) -> detailactivity
                     Intent intent = new Intent(getActivity(), EventDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("EventDetail", mEvents.get(position));
