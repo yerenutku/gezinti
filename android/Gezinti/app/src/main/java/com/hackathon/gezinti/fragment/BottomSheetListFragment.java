@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.hackathon.gezinti.EventCreationActivity;
 import com.hackathon.gezinti.EventDetailActivity;
+import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.adapters.EventsAdapter;
 import com.hackathon.gezinti.models.common.Event;
@@ -52,7 +53,7 @@ public class BottomSheetListFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("EventDetail", mEvents.get(position));
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    getActivity().startActivityForResult(intent, MainActivity.EVENT_DETAIL_REQUEST_CODE);
                 }
             }
         }));

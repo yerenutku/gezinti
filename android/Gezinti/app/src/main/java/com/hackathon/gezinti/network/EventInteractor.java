@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.reflect.TypeToken;
 import com.hackathon.gezinti.interfaces.EventCreateListener;
 import com.hackathon.gezinti.interfaces.EventSearchListener;
+import com.hackathon.gezinti.interfaces.GeneralSuccessListener;
 import com.hackathon.gezinti.interfaces.GetEventDetailListener;
 import com.hackathon.gezinti.interfaces.SuccessListener;
 import com.hackathon.gezinti.models.request.EventCreateRequest;
@@ -82,6 +83,39 @@ public class EventInteractor {
             }
         });
     }
+
+    public void leaveEvent(String eventId, String userId, final GeneralSuccessListener listener){
+        listener.onBeforeRequest();
+        VolleyClientRequests.getInstance(mContext).get("/api/event/"+eventId+"/"+userId+"/remove", null, new SuccessListener() {
+            @Override
+            public void onSuccess(Object response) {
+                listener.onSuccess();
+                listener.onAfterRequest();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(error.toString());
+            }
+        });
+    }
+
+    public void joinEvent(String eventId, String userId, final GeneralSuccessListener listener){
+        listener.onBeforeRequest();
+        VolleyClientRequests.getInstance(mContext).get("/api/event/"+eventId+"/"+userId+"/join", null, new SuccessListener() {
+            @Override
+            public void onSuccess(Object response) {
+                listener.onSuccess();
+                listener.onAfterRequest();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(error.toString());
+            }
+        });
+    }
+
 
 
 }

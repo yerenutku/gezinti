@@ -8,9 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -36,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mButtonRefresh;
     //private Spinner mEventsSpinner, mTimesSpinner;
     private EventInteractor mEventInteractor;
+    private static int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    public static int EVENT_DETAIL_REQUEST_CODE = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBottomSheetListFragment = (BottomSheetListFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentBottomSheet);
         mBottomSheetListFragment.setDimBackground(findViewById(R.id.dim_background));
         mBottomSheetBehavior  = BottomSheetBehavior.from(findViewById(R.id.fragmentBottomSheet));
-        mBottomSheetBehavior.setHideable(true);
+        mBottomSheetBehavior.setHideable(false);
         mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetListFragment.getBottomSheetCallback());
 
         ArrayList<Event> events = new ArrayList<>();
@@ -117,61 +118,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId() == mButtonRefresh.getId()){
             if(mMapFragment.isAdded()){
-
-                //make network request with mapfragment.scenterofscreen and response is OnTempResponse now
-                LatLng latLng = mMapFragment.getCenterOfScreen();
-                double longitude = latLng.longitude;
-                double latitude = latLng.latitude;
-
-                //int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
-                //int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
-
-                Log.e("MainAct", "Lat: "+latitude + " Lon: " + longitude);
-                mEventInteractor = new EventInteractor(this);
-                EventSearchRequest eventSearchRequest = new EventSearchRequest();
-                eventSearchRequest.setLat(String.valueOf(latitude));
-                eventSearchRequest.setLon(String.valueOf(longitude));
-                mEventInteractor.eventSearch(eventSearchRequest, new EventSearchListener() {
-                    @Override
-                    public void onEventSearch(EventSearchResponse response) {
-                        mBottomSheetListFragment.refreshEvents(response.getEvents());
-                        mMapFragment.getEventsAndPin(response.getEvents());
-                    }
-
-                    @Override
-                    public void onError(String errorMessage) {
-
-                    }
-
-                    @Override
-                    public void onBeforeRequest() {
-
-                    }
-
-                    @Override
-                    public void onAfterRequest() {
-
-                    }
-                });
-//                OnTempResponse();
-
+                findNearByEvents();
             }
         }
     }
 
-//    private void OnTempResponse(){
-//        List<EventResponse> eventResponseList = new ArrayList<>();
-//        eventResponseList.add(new EventResponse("test-coord", 41.0824866,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord2", 41.0825866,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord3", 41.0824866,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord4", 41.0824766,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord5", 41.0825866,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord6", 41.0822866,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord7", 41.0814866,29.0210442));
-//        eventResponseList.add(new EventResponse("test-coord8", 41.0824876,29.0210442));
-//        mBottomSheetListFragment.refreshEvents(eventResponseList);
-//        mMapFragment.getEventsAndPin(eventResponseList);
-//    }
+    private void findNearByEvents() {
+        //make network request with mapfragment.scenterofscreen and response is OnTempResponse now
+        LatLng latLng = mMapFragment.getCenterOfScreen();
+        double longitude = latLng.longitude;
+        double latitude = latLng.latitude;
+
+        //int spEventsPosition = mEventsSpinner.getSelectedItemPosition();
+        //int spTimesPosition = mTimesSpinner.getSelectedItemPosition();
+
+        Log.e("MainAct", "Lat: "+latitude + " Lon: " + longitude);
+        mEventInteractor = new EventInteractor(this);
+        EventSearchRequest eventSearchRequest = new EventSearchRequest();
+        eventSearchRequest.setLat(String.valueOf(latitude));
+        eventSearchRequest.setLon(String.valueOf(longitude));
+        mEventInteractor.eventSearch(eventSearchRequest, new EventSearchListener() {
+            @Override
+            public void onEventSearch(EventSearchResponse response) {
+                mBottomSheetListFragment.refreshEvents(response.getEvents());
+                mMapFragment.getEventsAndPin(response.getEvents());
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+
+            }
+
+            @Override
+            public void onBeforeRequest() {
+
+            }
+
+            @Override
+            public void onAfterRequest() {
+
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -179,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_search){
@@ -214,6 +201,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
+            }
+        }
+        if (requestCode == EVENT_DETAIL_REQUEST_CODE){
+            if (resultCode == RESULT_OK){
+                findNearByEvents();
             }
         }
     }

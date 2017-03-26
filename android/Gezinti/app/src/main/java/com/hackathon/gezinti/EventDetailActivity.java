@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hackathon.gezinti.interfaces.GeneralSuccessListener;
 import com.hackathon.gezinti.models.common.Coordinates;
 import com.hackathon.gezinti.models.common.Event;
 import com.hackathon.gezinti.models.common.User;
+import com.hackathon.gezinti.network.EventInteractor;
 
 public class EventDetailActivity extends AppCompatActivity {
 
@@ -17,17 +19,17 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView tvTitle, tvOwner, tvDesc, tvTime, tvLocations, tvMembers;
     private Button btJoin, btLeave;
     public static final String hardcodedUserID = "58d6cff97909d41fd4fc6e02";
-    boolean isJoined = false;
-
+    private boolean isJoined = false;
+    private EventInteractor mInteractor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
-
+        setResult(RESULT_CANCELED);
         Bundle bundle = this.getIntent().getExtras();
         if (bundle == null) finish();
         mEvent = (Event) bundle.getSerializable("EventDetail");
-
+        mInteractor = new EventInteractor(this);
 
         Log.d("EventDetail", mEvent.getTitle() + " - " + mEvent.getCoordinatesList().get(0).getLat() + " " + mEvent.getCoordinatesList().get(0).getLon());
 
@@ -59,12 +61,76 @@ public class EventDetailActivity extends AppCompatActivity {
         String members = "";
         for (User user : mEvent.getMembers()) {
             members = members + user.getName() + "\n";
-            if (user.getId().equals(hardcodedUserID)) isJoined = true;
         }
         tvMembers.setText(getString(R.string.event_detail_members, members));
 
         btJoin = (Button) findViewById(R.id.btJoin);
         btLeave = (Button) findViewById(R.id.btLeave);
+        btJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mInteractor.joinEvent(mEvent.getId(), hardcodedUserID, new GeneralSuccessListener() {
+                    @Override
+                    public void onSuccess() {
+                        setResult(RESULT_OK);
+                        isJoined = true;
+                        checkButtonsVisibility();
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+
+                    }
+
+                    @Override
+                    public void onBeforeRequest() {
+
+                    }
+
+                    @Override
+                    public void onAfterRequest() {
+
+                    }
+                });
+            }
+        });
+        btLeave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mInteractor.leaveEvent(mEvent.getId(), hardcodedUserID, new GeneralSuccessListener() {
+                    @Override
+                    public void onSuccess() {
+                        setResult(RESULT_OK);
+                        isJoined = false;
+                        checkButtonsVisibility();
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+
+                    }
+
+                    @Override
+                    public void onBeforeRequest() {
+
+                    }
+
+                    @Override
+                    public void onAfterRequest() {
+
+                    }
+                });
+            }
+        });
+        isJoined = false;
+        for (User user : mEvent.getMembers()) {
+            if (user.getId().equals(hardcodedUserID)) isJoined = true;
+        }
+        checkButtonsVisibility();
+
+    }
+
+    private void checkButtonsVisibility() {
         if (isJoined) {
             btJoin.setVisibility(View.GONE);
             btLeave.setVisibility(View.VISIBLE);
