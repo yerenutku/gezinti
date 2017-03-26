@@ -14,6 +14,7 @@
 
     <string name="event_detail_title">"Event title: %s"</string>
     <string name="event_detail_owner">"Event owner: %s"</string>
+    <string name="event_detail_tel">"Owner tel: %s"</string>
     <string name="event_detail_desc">"Event description: %s"</string>
     <string name="event_detail_time">"Event time: %s"</string>
     <string name="event_detail_locations">"Event locations: %s"</string>
@@ -22,6 +23,7 @@
     <string name="event_detail_eventtype">"Event type: %s"</string>
     <string name="btn_text_join">Join the event</string>
     <string name="btn_text_leave">Leave the Event</string>
+    <string name="btn_text_delete">Delete the event</string>
 
     <string-array name="array_event_types">
         <item>Choices</item>

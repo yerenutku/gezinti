@@ -16,10 +16,10 @@ import com.hackathon.gezinti.network.EventInteractor;
 public class EventDetailActivity extends AppCompatActivity {
 
     private Event mEvent;
-    private TextView tvTitle, tvOwner, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
-    private Button btJoin, btLeave;
+    private TextView tvTitle, tvOwner, tvTel, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
+    private Button btJoin, btLeave, btDelete;
     public static final String hardcodedUserID = "58d6bdb989f42f0544a8721d";
-    private boolean isJoined = false;
+    private boolean isJoined = false, isOwner = false;
     private EventInteractor mInteractor;
 
     @Override
@@ -44,6 +44,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
         tvOwner = (TextView) findViewById(R.id.tvOwner);
         tvOwner.setText(getString(R.string.event_detail_owner, mEvent.getOwner().getName()));
+
+        tvTel = (TextView) findViewById(R.id.tvTel);
+        tvTel.setText(getString(R.string.event_detail_tel, mEvent.getOwner().getTel()));
 
         tvDesc = (TextView) findViewById(R.id.tvDesc);
         tvDesc.setText(getString(R.string.event_detail_desc, mEvent.getDesc()));
@@ -128,22 +131,39 @@ public class EventDetailActivity extends AppCompatActivity {
                 });
             }
         });
+        btDelete = (Button) findViewById(R.id.btDeleteEvent);
+        btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         isJoined = false;
+        isOwner = false;
         for (User user : mEvent.getMembers()) {
             if (user.getId().equals(hardcodedUserID)) isJoined = true;
         }
-        if (mEvent.getOwner().getId().equals(hardcodedUserID)) isJoined = true;
+        if (mEvent.getOwner().getId().equals(hardcodedUserID)) isOwner = true;
         checkButtonsVisibility();
 
     }
 
     private void checkButtonsVisibility() {
-        if (isJoined) {
+        if (isOwner) {
             btJoin.setVisibility(View.GONE);
-            btLeave.setVisibility(View.VISIBLE);
-        } else {
-            btJoin.setVisibility(View.VISIBLE);
             btLeave.setVisibility(View.GONE);
+            btDelete.setVisibility(View.VISIBLE);
+        } else {
+            if (isJoined) {
+                btJoin.setVisibility(View.GONE);
+                btLeave.setVisibility(View.VISIBLE);
+                btDelete.setVisibility(View.GONE);
+            } else {
+                btJoin.setVisibility(View.VISIBLE);
+                btLeave.setVisibility(View.GONE);
+                btDelete.setVisibility(View.GONE);
+            }
         }
     }
 }

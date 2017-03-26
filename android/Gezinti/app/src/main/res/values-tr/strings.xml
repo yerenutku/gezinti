@@ -4,12 +4,14 @@
     <string name="activity_main_button_refresh">Bu alanı ara</string>
     <string name="event_detail_title">"Etkinlik ismi: %s"</string>
     <string name="event_detail_owner">"Etkinlik sahibi: %s"</string>
+    <string name="event_detail_tel">"Etkinlik sahibi tel: %s"</string>
     <string name="event_detail_desc">"Etkinlik açıklaması: %s"</string>
     <string name="event_detail_time">"Etkinlik zamanı: %s"</string>
     <string name="event_detail_locations">"Etkinliğin lokasyonları: %s"</string>
     <string name="event_detail_members">"Etkinlik katılımcıları: %s"</string>
     <string name="btn_text_join">Etkinliğe Katıl</string>
     <string name="btn_text_leave">Etkinlikten Ayrıl</string>
+    <string name="btn_text_delete">Etkinliği Sil</string>
 
     <string-array name="array_event_types">
         <item>Seçiniz</item>

@@ -15,6 +15,8 @@ public class User implements Serializable{
     private String name;
     @SerializedName("password")
     private String password;
+    @SerializedName("tel")
+    private String tel;
 
     public String getName() {
         return name;
@@ -26,5 +28,9 @@ public class User implements Serializable{
 
     public String getId() {
         return id;
+    }
+
+    public String getTel() {
+        return tel;
     }
 }

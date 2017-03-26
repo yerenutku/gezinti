@@ -20,6 +20,12 @@
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/tvTel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/tvDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,5 +79,16 @@
         android:text="@string/btn_text_leave"
         android:visibility="gone" />
 
+    <Button
+        android:id="@+id/btDeleteEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_green_light"
+        android:padding="3dp"
+        android:text="@string/btn_text_delete"
+        android:visibility="gone" />
 
 </LinearLayout>
