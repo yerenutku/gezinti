@@ -46,24 +46,27 @@ Tek class üzerinden gerçekleşir. Jenerik sınıflar ile dönüş response tip
 Örnek
 ```java
 yourInstance.post("yourUrl", request, new SuccessListener<EventCreateResponse>() {
-   @Override
-   public void onSuccess(EventCreateResponse response) {
-   ...
-  }
+    @Override
+    public void onSuccess(EventCreateResponse response) {
+    ...
+    }
  },
  new Response.ErrorListener() {
- @Override
- public void onErrorResponse(VolleyError error) {
+    @Override
+    public void onErrorResponse(VolleyError error) {
     ...
- }
+    }
 });
                 
 ```
 #### Hata yorumlamaları
-`Volley` ile dönen `VolleyError` türündeki objeler türüne göre bir mesaj türetilerek, UI 'a paslanır.
+`Volley` ile dönen `VolleyError` türündeki objeler türüne göre bir mesaj türetilerek, UI 'a paslanır. Base sınıf hata türüne göre generate edilmiş hatayı kullanıcıya gösterir.
 
 #### View - Interactor
 Çok fazla servis çağrısı olmadığı için presenter yapısı araya koyulması gereksiz görüldü.
 Interactor -> servis çağrısı yapar ve sonucu UI'lara interfaceler ile paslar. Çağıran sınıf interface tanımlamaları yaptıkları için çağırdıkları yerde ya da instance oluşturarak gelen cevaplar ile `UI update` işlemlerini yapabilir.
 `BaseActivity` , dialog gösterir ve error gösterme işlerini yapar. Böylelikle her fragment/activity içerisinde kod tekrarı yapılmaz.
 
+#### Kullanıcı etkileşimi
+Ana fonksiyonun harita üzerinde olmasından dolayı, harita açık iken yapılacak etkileşimleri alttan açılan menu şeklinde `BottomSheet` kullanılarak yapıldı.
+Bu sayede kullanıcı haritayı görmek istediğinde UX problemi çekmeden haritaya ulaşabilir, etkileşime geçmek istediğinde haritadan kopmadan devam edebilir.
