@@ -12,19 +12,49 @@ Bu repo, getir-bitaksi hackathon 2017 süresince gerçekleştirilmiş `Gezinti` 
 şeklindedir. Geliştirme branch'i `dev` branchidir.
 
 ## Backend
-Backend hakkında söylenecek bir çift söz
+NodeJs ve MongoDB, ve Mongoose kullanılarak REST API geliştirildi.
 #### Teknolojiler;
-
+- NodeJS
+- MongoDB
+- ExpressJs
+- Mongoose
 #### Gerçekleştirilenler;
+Genel tasklar:
+- Error handling
+- Promise kullanımı
+
+Etkinlik taskları:
+- Etkinlik oluşturulması
+- Kullanıcıların etkinlie katılabilmeleri ve çıkabilmeleri
+- Etkinliklerin tek olarak görüntülenebilmesi
+- Etkinlik aramasında yakınlığa göre etkinliklerin seçilmesi
+- Etkinliklerin oluşturan kullanıcı tarafından silinebilmesi
+- Etkinliklere yorum yapılması
+- Yapılan yorumların yapan kişi tarafından silinebilmesi
 
 
+Kullanıcı taskları
+- Kullanıcıların bilgilerinin görüntülenebilmesi
+- Kullanıcı kaydetme
+- Kullanıcının profil bilgisini görüntüleme
+- Kullanıcıyı seçmek
 ## Frontend
-Frontend hakkında söylenecek iki çift laf
+AngularJs ve NodeJs tabanlı single page application geliştirildi.
 #### Teknolojiler;
-
+- AngularJs
+- NodeJs
+- Material Design Lite
+- Jquery
+- Material Select
+- Material Icons
 #### Gerçekleştirilenler;
-
-
+- Kullanıcının bulunduğu konumun alınması
+- Bu konuma göre arama yapılması
+- Etkinliklerin tek tek görüntülenmesi
+- Etkinlik oluşturma
+- Harita üstünden seçilen bir noktadan etkinliğe gitme
+- Etkinliğe katılma
+- Etkinlikten Çıkma
 ## Android
 Android hakkındaki gerçekler
 
