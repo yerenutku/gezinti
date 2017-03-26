@@ -9,11 +9,12 @@ Subfolderlar halinde tüm projeler bu repo içerisinde toplanmıştır.
 - Yasin Arslan
 # İçindekiler
 - [Commit Standartı](#commit-standart)
+- [API Reference](#api-reference)
 - [Backend](#backend)
 - [Frontend](#frontend)
 - [Android](#android)
 
-#### Commit Standart
+## Commit Standart
 `[platform][branch][feature][commit message]`
 şeklindedir. Geliştirme branch'i `dev` branch'idir. Ana branch `master` branch'idir.
 
