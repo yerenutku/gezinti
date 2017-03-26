@@ -116,6 +116,20 @@ public class EventInteractor {
         });
     }
 
-
+    public void deleteEvent(String eventId, final GeneralSuccessListener listener){
+        listener.onBeforeRequest();
+        VolleyClientRequests.getInstance(mContext).get("/api/event/" + eventId + "/remove", null, new SuccessListener() {
+            @Override
+            public void onSuccess(Object response) {
+                listener.onSuccess();
+                listener.onAfterRequest();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(error.toString());
+            }
+        });
+    }
 
 }

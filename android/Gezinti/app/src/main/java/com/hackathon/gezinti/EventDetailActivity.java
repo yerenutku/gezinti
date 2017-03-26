@@ -135,7 +135,28 @@ public class EventDetailActivity extends AppCompatActivity {
         btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mInteractor.deleteEvent(mEvent.getId(), new GeneralSuccessListener() {
+                    @Override
+                    public void onSuccess() {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
 
+                    @Override
+                    public void onError(String errorMessage) {
+                        Log.d("DetailError", errorMessage);
+                    }
+
+                    @Override
+                    public void onBeforeRequest() {
+                        Log.d("DetailBefore", "");
+                    }
+
+                    @Override
+                    public void onAfterRequest() {
+                        Log.d("DetailAfter", "");
+                    }
+                });
             }
         });
 
