@@ -29,8 +29,12 @@ exports.joinEvent = function(req,res){
     currentEvent.members.push(req.params.userId);
     currentEvent.save().then(function(savedEvent){
       res.json(savedEvent);
-    }).catch(console.error);
-  }).catch(console.error);
+    }).catch(function(err){
+      res.status(500).send({error: err});
+    });
+  }).catch(function(err){
+    res.status(500).send({error: err});
+  });
 };
 
 exports.removeUserFromEvent = function(req,res){
@@ -40,19 +44,24 @@ exports.removeUserFromEvent = function(req,res){
       if(new Date(currentEvent.time)<new Date())
         res.send('passed event')
       var index = currentEvent.members.indexOf(req.params.userId);
-      console.log(index);
       if(index>-1)
         currentEvent.members.splice(index,1);
       currentEvent.save().then(function(savedEvent){
         res.json(savedEvent);
-      }).catch(console.error);
-    }).catch(console.error);
+      }).catch(function(err){
+        res.status(500).send({error: err});
+      });
+    }).catch(function(err){
+      res.status(500).send({error: err});
+    });
 };
 
 exports.getEventById = function(req,res){
   events.findOne({_id: req.params.eventId}).populate('owner').populate('members').exec().then(function(currentEvent){
     res.json(currentEvent);
-  }).catch(console.error);
+  }).catch(function(err){
+    res.status(500).send({error: err});
+  });
 };
 
 if(typeof(Number.prototype.toRad) === "undefined") {
@@ -79,6 +88,9 @@ function getDistance(point1,point2){
 exports.getEventsByLatLong = function(req,res){
   events.find({}).populate('owner').populate('members').exec().then(function(eventList){
     var resultList = {}, lat1 = req.body.lat, lon1 = req.body.lon, resultArray = [];
+    console.log(lat1);
+    if(lat1 == undefined || lon1 == undefined)
+      res.status(405).send();
     eventList.forEach(function(elem){
       var locations = elem.location;
       for(var i = 0; i < locations.length; i++){
@@ -92,13 +104,14 @@ exports.getEventsByLatLong = function(req,res){
       }
     });
     var eventTime = req.body.eventTime, eventType = req.body.eventType;
-    resultArray.filter(function(elem){
-      var count = 0;
-      if(eventTime == 0 || elem.eventTime == eventTime)
-        count ++;
-      if(eventType == 0 || elem.eventType == eventType)
-        count ++;
-      if(count == 2)
+    resultArray = resultArray.filter(function(elem){
+      if(eventTime == 0 && eventType != 0 && elem.eventType == eventType)
+        return elem;
+      if(eventTime != 0 && eventType == 0 && elem.eventTime == eventTime)
+        return elem;
+      if(eventTime == 0 && eventType == 0)
+        return elem;
+      if(eventTime != 0 && eventType != 0 && elem.eventType == eventType && elem.eventTime == eventTime)
         return elem;
     });
     resultList.result = resultArray;
@@ -130,20 +143,33 @@ exports.registerEvent = function(req,res){
 
 exports.removeEvent = function(req,res){
   events.findOne({_id: req.params.eventId}).remove().exec().then(function(){
-    res.send('deleted');
-  }).catch(console.error);
+    res.status(200).send({message:"deleted"});
+  }).catch(function(err){
+    res.status(500).send({error: err});
+  });
 };
 
 exports.commentEvent = function(req,res){
-  var newComment = new comments(req.body);
+  var newComment;
+  try{
+    newComment = new comments(req.body);
+  }catch(error){
+    res.status(405).send({error: err});
+  }
   newComment.save().then(function(savedComment){
     events.findOne({_id: req.params.eventId}).exec().then(function(currentEvent){
       currentEvent.comments.push(savedComment._id);
       currentEvent.save().then(function(savedEvent){
         res.send(savedEvent)
-      }).catch(console.error,res.send({status: res.status(), data: error}));
-    }).catch(console.error,res.send({status: res.status(), data: error}));
-  }).catch(console.error,res.send({status: res.status(), data: error}));
+      }).catch(function(err){
+        res.status(500).send({error: err});
+      });
+    }).catch(function(err){
+      res.status(500).send({error: err});
+    });
+  }).catch(function(err){
+    res.status(500).send({error: err});
+  });
 };
 
 exports.removeComment = function(req,res){
@@ -151,6 +177,10 @@ exports.removeComment = function(req,res){
       currentEvent.comments.splice(currentEvent.comments.indexOf(req.body.commentId),1);
       currentEvent.save().then(function(savedEvent){
         res.send(savedEvent)
-      }).catch(console.error);
-    }).catch(console.error);
+      }).catch(function(err){
+        res.status(500).send({error: err});
+      });
+    }).catch(function(err){
+      res.status(500).send({error: err});
+    });
 };
