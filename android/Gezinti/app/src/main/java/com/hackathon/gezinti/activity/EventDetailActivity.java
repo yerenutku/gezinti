@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hackathon.gezinti.BuildConfig;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.interfaces.GeneralSuccessListener;
 import com.hackathon.gezinti.models.common.Coordinates;
@@ -18,7 +19,7 @@ public class EventDetailActivity extends BaseActivity {
     private Event mEvent;
     private TextView tvTitle, tvOwner, tvTel, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
     private Button btJoin, btLeave, btDelete;
-    public static final String hardcodedUserID = "58d6bdb989f42f0544a8721d";
+    public static final String hardcodedUserID = BuildConfig.HardcodedUserId;
     private boolean isJoined = false, isOwner = false;
     private EventInteractor mInteractor;
 
@@ -135,7 +136,28 @@ public class EventDetailActivity extends BaseActivity {
         btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mInteractor.deleteEvent(mEvent.getId(), new GeneralSuccessListener() {
+                    @Override
+                    public void onSuccess() {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
 
+                    @Override
+                    public void onError(String errorMessage) {
+                        Log.d("DetailError", errorMessage);
+                    }
+
+                    @Override
+                    public void onBeforeRequest() {
+                        Log.d("DetailBefore", "");
+                    }
+
+                    @Override
+                    public void onAfterRequest() {
+                        Log.d("DetailAfter", "");
+                    }
+                });
             }
         });
 

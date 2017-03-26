@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import com.hackathon.gezinti.BuildConfig;
 import com.hackathon.gezinti.activity.BaseActivity;
 import com.hackathon.gezinti.activity.EventDetailActivity;
 import com.hackathon.gezinti.activity.MainActivity;
@@ -152,7 +153,7 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                 eventCreateRequest.setCoordinates(list);
                 eventCreateRequest.setEventTime(String.valueOf(spEventTimes.getSelectedItemPosition()));
                 eventCreateRequest.setEventType(String.valueOf(spEventTypes.getSelectedItemPosition()));
-                eventCreateRequest.setOwner("58d6bdb989f42f0544a8721d");
+                eventCreateRequest.setOwner(BuildConfig.HardcodedUserId);
 
                 EventInteractor eventInteractor = new EventInteractor(getContext());
                 eventInteractor.eventCreate(eventCreateRequest, new EventCreateListener() {
