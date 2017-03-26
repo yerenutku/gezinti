@@ -1,6 +1,7 @@
 # gezinti
 Getir &amp; BiTaksi Hackathon
 Bu repo, getir-bitaksi hackathon 2017 süresince gerçekleştirilmiş `Gezinti` ekibinin backend, frontend ve android/ios uygulamalarını içerir.
+Subfolderlar halinde tüm projeler bu repo içerisinde toplanmıştır.
 
 ### Ekip Üyeleri
 - Eren Utku
@@ -11,6 +12,7 @@ Bu repo, getir-bitaksi hackathon 2017 süresince gerçekleştirilmiş `Gezinti` 
 - [Backend](#backend)
 - [Frontend](#frontend)
 - [Android](#android)
+
 #### Commit Standart
 `[platform][branch][feature][commit message]`
 şeklindedir. Geliştirme branch'i `dev` branch'idir. Ana branch `master` branch'idir.
