@@ -2,6 +2,15 @@
     <string name="app_name">Gezinti</string>
 
     <string name="activity_main_button_refresh">Bu alanı ara</string>
+    <string name="error_msg_reason">"Sebebi: "</string>
+    <string name="error_msg_general_title">"Hata"</string>
+    <string name="error_msg_timeout">Timeout ya da bağlantı yok</string>
+    <string name="error_msg_auth_failure">Yetki Hatası</string>
+    <string name="error_msg_server">Server Hatası</string>
+    <string name="error_msg_network">Ağ hatası</string>
+    <string name="error_msg_parse">Mesaj okunamadı</string>
+    <string name="error_msg_btn_txt">Tamam</string>
+
     <string name="event_detail_title">"Etkinlik ismi: %s"</string>
     <string name="event_detail_owner">"Etkinlik sahibi: %s"</string>
     <string name="event_detail_tel">"Etkinlik sahibi tel: %s"</string>
@@ -12,6 +21,7 @@
     <string name="btn_text_join">Etkinliğe Katıl</string>
     <string name="btn_text_leave">Etkinlikten Ayrıl</string>
     <string name="btn_text_delete">Etkinliği Sil</string>
+    <string name="loading_text">Yüklüyoruz</string>
 
     <string-array name="array_event_types">
         <item>Seçiniz</item>
