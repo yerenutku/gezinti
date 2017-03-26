@@ -101,3 +101,18 @@ Interactor -> servis çağrısı yapar ve sonucu UI'lara interfaceler ile paslar
 #### Kullanıcı etkileşimi
 Ana fonksiyonun harita üzerinde olmasından dolayı, harita açık iken yapılacak etkileşimleri alttan açılan menu şeklinde `BottomSheet` kullanılarak yapıldı.
 Bu sayede kullanıcı haritayı görmek istediğinde UX problemi çekmeden haritaya ulaşabilir, etkileşime geçmek istediğinde haritadan kopmadan devam edebilir.
+
+#### Google Maps & Places
+
+Google Developer Console'dan alınan API_KEY ile uygulamaya Maps ve Places özelliği eklendi.
+
+##### Maps işlemleri;
+- Geçerli konum bulma ve odaklanma
+- Görüntülenen harita ekranında belirli bir alanda arama özelliği
+- Etkinlik türüne göre harita üzerine tek nokta veya poligon olarak görüntüleme
+- Belirlenen arama kriterlerine göre filtreleme ve harita yenileme
+- Etkinlik oluştururken tek veya çoklu konum seçme, çoklu seçimde işlemi geri alma özelliği
+
+##### Places işlemleri;
+- Konum veya mekan arama özelliği
+- Arama sonucu otomatik odaklanma ve etraftaki etkinlikleri görüntüleme
