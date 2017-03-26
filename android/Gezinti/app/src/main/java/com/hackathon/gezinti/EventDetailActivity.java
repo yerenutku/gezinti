@@ -16,11 +16,12 @@ import com.hackathon.gezinti.network.EventInteractor;
 public class EventDetailActivity extends AppCompatActivity {
 
     private Event mEvent;
-    private TextView tvTitle, tvOwner, tvDesc, tvTime, tvLocations, tvMembers;
+    private TextView tvTitle, tvOwner, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
     private Button btJoin, btLeave;
     public static final String hardcodedUserID = "58d6cff97909d41fd4fc6e02";
     private boolean isJoined = false;
     private EventInteractor mInteractor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +48,6 @@ public class EventDetailActivity extends AppCompatActivity {
         tvDesc = (TextView) findViewById(R.id.tvDesc);
         tvDesc.setText(getString(R.string.event_detail_desc, mEvent.getDesc()));
 
-        tvTime = (TextView) findViewById(R.id.tvTime);
-        tvTime.setText(getString(R.string.event_detail_time, mEvent.getTime()));
-
         tvLocations = (TextView) findViewById(R.id.tvLocations);
         String locations = "";
         for (Coordinates coordinate : mEvent.getCoordinatesList()) {
@@ -63,6 +61,14 @@ public class EventDetailActivity extends AppCompatActivity {
             members = members + user.getName() + "\n";
         }
         tvMembers.setText(getString(R.string.event_detail_members, members));
+
+        tvEventTime = (TextView) findViewById(R.id.tvEventTime);
+        String[] eventTimes = getResources().getStringArray(R.array.array_event_times);
+        tvEventTime.setText(getString(R.string.event_detail_time, eventTimes[Integer.valueOf(mEvent.getEventTime())]));
+
+        String[] eventTypes = getResources().getStringArray(R.array.array_event_types);
+        tvEventType = (TextView) findViewById(R.id.tvEventType);
+        tvEventType.setText(getString(R.string.event_detail_eventtype, eventTypes[Integer.valueOf(mEvent.getEventType())]));
 
         btJoin = (Button) findViewById(R.id.btJoin);
         btLeave = (Button) findViewById(R.id.btLeave);
