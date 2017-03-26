@@ -3,13 +3,17 @@ Getir &amp; BiTaksi Hackathon
 Bu repo, getir-bitaksi hackathon 2017 süresince gerçekleştirilmiş `Gezinti` ekibinin backend, frontend ve android/ios uygulamalarını içerir.
 
 ### Ekip Üyeleri
-- Eren
-- Necil 
-- Mert
-- Yasin
-#### Commit Standartı
+- Eren Utku
+- Necil Albayrak
+- Yasin Arslan
+# İçindekiler
+- [Commit Standartı](#commit-standart)
+- [Backend](#backend)
+- [Frontend](#frontend)
+- [Android](#android)
+#### Commit Standart
 `[platform][branch][feature][commit message]`
-şeklindedir. Geliştirme branch'i `dev` branchidir.
+şeklindedir. Geliştirme branch'i `dev` branch'idir. Ana branch `master` branch'idir.
 
 ## Backend
 NodeJs ve MongoDB, ve Mongoose kullanılarak REST API geliştirildi.
