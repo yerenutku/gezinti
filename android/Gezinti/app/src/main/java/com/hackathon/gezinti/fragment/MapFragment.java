@@ -114,7 +114,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         googleMap.setOnInfoWindowClickListener(this);
         googleMap.setOnMapLongClickListener(this);
-        makeRequestAndPin();
     }
 
     protected synchronized void buildGoogleApiClient() {
