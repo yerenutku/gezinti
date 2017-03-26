@@ -3,9 +3,16 @@ package com.hackathon.gezinti.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.google.gson.reflect.TypeToken;
+import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.interfaces.EventCreateListener;
 import com.hackathon.gezinti.interfaces.EventSearchListener;
 import com.hackathon.gezinti.interfaces.GeneralSuccessListener;
@@ -42,7 +49,8 @@ public class EventInteractor {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("TAG_ERROR", error.toString());
-                        listener.onError(error.toString());
+                        listener.onError(userFriendlyError(error));
+                        listener.onAfterRequest();
                     }
                 });
     }
@@ -61,7 +69,8 @@ public class EventInteractor {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("TAG_ERROR", error.toString());
-                        listener.onError(error.toString());
+                        listener.onError(userFriendlyError(error));
+                        listener.onAfterRequest();
                     }
                 });
     }
@@ -79,14 +88,16 @@ public class EventInteractor {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(error.toString());
+                Log.d("TAG_ERROR", error.toString());
+                listener.onError(userFriendlyError(error));
+                listener.onAfterRequest();
             }
         });
     }
 
-    public void leaveEvent(String eventId, String userId, final GeneralSuccessListener listener){
+    public void leaveEvent(String eventId, String userId, final GeneralSuccessListener listener) {
         listener.onBeforeRequest();
-        VolleyClientRequests.getInstance(mContext).get("/api/event/"+eventId+"/"+userId+"/remove", null, new SuccessListener() {
+        VolleyClientRequests.getInstance(mContext).get("/api/event/" + eventId + "/" + userId + "/remove", null, new SuccessListener() {
             @Override
             public void onSuccess(Object response) {
                 listener.onSuccess();
@@ -95,14 +106,16 @@ public class EventInteractor {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(error.toString());
+                Log.d("TAG_ERROR", error.toString());
+                listener.onError(userFriendlyError(error));
+                listener.onAfterRequest();
             }
         });
     }
 
-    public void joinEvent(String eventId, String userId, final GeneralSuccessListener listener){
+    public void joinEvent(String eventId, String userId, final GeneralSuccessListener listener) {
         listener.onBeforeRequest();
-        VolleyClientRequests.getInstance(mContext).get("/api/event/"+eventId+"/"+userId+"/join", null, new SuccessListener() {
+        VolleyClientRequests.getInstance(mContext).get("/api/event/" + eventId + "/" + userId + "/join", null, new SuccessListener() {
             @Override
             public void onSuccess(Object response) {
                 listener.onSuccess();
@@ -111,7 +124,9 @@ public class EventInteractor {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(error.toString());
+                Log.d("TAG_ERROR", error.toString());
+                listener.onError(userFriendlyError(error));
+                listener.onAfterRequest();
             }
         });
     }
@@ -127,9 +142,28 @@ public class EventInteractor {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(error.toString());
+                Log.d("TAG_ERROR", error.toString());
+                listener.onError(userFriendlyError(error));
+                listener.onAfterRequest();
             }
         });
     }
+
+    private String userFriendlyError(VolleyError error) {
+        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+            return mContext.getString(R.string.error_msg_timeout) + " : " + mContext.getString(R.string.error_msg_reason) + error.getMessage();
+        } else if (error instanceof AuthFailureError) {
+            return mContext.getString(R.string.error_msg_auth_failure) + " : " + mContext.getString(R.string.error_msg_reason) + error.getMessage();
+        } else if (error instanceof ServerError) {
+            return mContext.getString(R.string.error_msg_server) + " : " + mContext.getString(R.string.error_msg_reason) + error.getMessage();
+        } else if (error instanceof NetworkError) {
+            return mContext.getString(R.string.error_msg_network) + " : " + mContext.getString(R.string.error_msg_reason) + error.getMessage();
+        } else if (error instanceof ParseError) {
+            return mContext.getString(R.string.error_msg_parse) + " : " + mContext.getString(R.string.error_msg_reason) + error.getMessage();
+        } else {
+            return mContext.getString(R.string.error_msg_general_title) + " : " + mContext.getString(R.string.error_msg_reason) + error.getMessage();
+        }
+    }
+
 
 }

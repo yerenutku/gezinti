@@ -5,6 +5,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="./node_modules/material-design-lite/material.css"/>
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body ng-app="mainApp" ng-controller="indexController as vm">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -18,7 +19,7 @@
       </header>
       </div>
       <div class="inner">
-        <ng-map class="map" default-style="true" center="{{mapConf.center}}" zoom="10">
+        <ng-map class="map" default-style="true" center="{{mapConf.center}}" zoom="10" on-click="vm.placeMarker()">
           <marker id='{{shop._id}}' position="{{shop.loc}}"
             ng-repeat="shop in vm.markers"
             on-click="vm.showDetail(shop)">
@@ -31,12 +32,24 @@
           </info-window>
         </ng-map>
         <div class="interactive">
+          <div class="add-container">
+            <button ng-click="showCreate()" ng-show="pageIndex != 2" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+              <i class="material-icons">add</i>
+            </button>
+            <button ng-click="cancelCreate()" ng-show="pageIndex == 2" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+              <i class="material-icons">undo</i>
+            </button>
+          </div>
           <div ng-show="pageIndex == 0">
-            <h4>Görüntülemek için seçim yapın</h4>
+            <h4>Detaylı görüntülemek için seçim yapın</h4>
           </div>
           <div ng-show="pageIndex == 1">
+            <div class="add-container go-back">
+              <button ng-click="goDefaultView()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <i class="material-icons">undo</i>
+              </button>
+            </div>
             <h4 ng-bind="currentEvent.title"></h4>
-
             <ul  class="demo-list-item mdl-list">
               <li class="mdl-list__item"><span class="mdl-list__item-primary-content">Açıklama: {{currentEvent.desc}}</span></p>
               <li class="mdl-list__item"><span class="mdl-list__item-primary-content">Katılımcılar</span></li>
@@ -51,12 +64,39 @@
               </button>
             </div>
           </div>
+          <div ng-show="pageIndex == 2">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input ng-model="title" class="mdl-textfield__input" type="text" id="sample1">
+                <label class="mdl-textfield__label" for="sample1">Etkinlik Adı</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input ng-model="desc" class="mdl-textfield__input" type="text" id="sample1">
+                <label class="mdl-textfield__label" for="sample1">Açıklama</label>
+              </div>
+              <div class="mdl-select mdl-js-select">
+                <select ng-options="time.tip for time in timeSelects track by time.value" ng-model="timeSelected" class="mdl-select__input" id="professsion" name="professsion">
+                </select>
+                <label class="mdl-select__label" for="professsion">Zaman Tercihi</label>
+              </div>
+              <div class="mdl-select mdl-js-select">
+                <select  ng-options="type.tip for type in typeSelects track by type.value" ng-model="typeSelected" class="mdl-select__input" id="professsion" name="professsion">
+                </select>
+                <label class="mdl-select__label" for="professsion">Profession</label>
+              </div>
+              <span class="mdl-list__item-primary-content">Lütfen en az bir tane adres işaretleyin.</span>
+            </form>
+            <button ng-click="saveEvent()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+              oluştur
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGBoor05DSOVvleAnpZNo8-wawc7glR-Q"></script>
     <script type="text/javascript" src="./node_modules/material-design-lite/material.min.js"></script>
+    <script type="text/javascript" src="./js/materialSelect.js"></script>
     <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="./node_modules/ngmap/build/scripts/ng-map.min.js"></script>
     <script type="text/javascript" src="./js/controller.js"></script>

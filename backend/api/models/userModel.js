@@ -11,6 +11,9 @@ var userSchema = new schema({
     type: Date,
     default: Date.now
   },
+  tel:{
+    type:String
+  },
   password:{
     type: String,
     Required: 'Şifre Giriniz'

@@ -17,8 +17,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.hackathon.gezinti.EventDetailActivity;
-import com.hackathon.gezinti.MainActivity;
+import com.hackathon.gezinti.activity.BaseActivity;
+import com.hackathon.gezinti.activity.EventDetailActivity;
+import com.hackathon.gezinti.activity.MainActivity;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.adapters.EventsAdapter;
 import com.hackathon.gezinti.interfaces.EventCreateListener;
@@ -162,15 +163,18 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                     }
                     @Override
                     public void onError(String errorMessage) {
-
+                        if (getActivity() instanceof BaseActivity)
+                            ((BaseActivity)getActivity()).showErrorMessage(errorMessage);
                     }
                     @Override
                     public void onBeforeRequest() {
-
+                        if (getActivity() instanceof BaseActivity)
+                            ((BaseActivity)getActivity()).showWaitingDialog();
                     }
                     @Override
                     public void onAfterRequest() {
-
+                        if (getActivity() instanceof BaseActivity)
+                            ((BaseActivity)getActivity()).dismissWaitingDialog();
                     }
                 });
             }
