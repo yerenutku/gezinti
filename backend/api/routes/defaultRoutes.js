@@ -9,6 +9,8 @@ module.exports = function(app){
     .post(indexController.registerUser);
   app.route('api/user')
     .get(indexController.getUsers);
+  app.route('/api/user/:userId')
+    .get(indexController.getUserProfile);
   app.route('/api/event/register')
     .post(eventController.registerEvent);
   app.route('/api/event/search')
