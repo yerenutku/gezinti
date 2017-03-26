@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hackathon.gezinti.BuildConfig;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.interfaces.GeneralSuccessListener;
 import com.hackathon.gezinti.models.common.Coordinates;
@@ -18,7 +19,7 @@ public class EventDetailActivity extends BaseActivity {
     private Event mEvent;
     private TextView tvTitle, tvOwner, tvTel, tvDesc, tvLocations, tvMembers, tvEventTime, tvEventType;
     private Button btJoin, btLeave, btDelete;
-    public static final String hardcodedUserID = "58d6bdb989f42f0544a8721d";
+    public static final String hardcodedUserID = BuildConfig.HardcodedUserId;
     private boolean isJoined = false, isOwner = false;
     private EventInteractor mInteractor;
 
