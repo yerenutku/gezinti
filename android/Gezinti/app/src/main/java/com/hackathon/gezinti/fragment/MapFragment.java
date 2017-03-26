@@ -30,13 +30,17 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hackathon.gezinti.EventDetailActivity;
 import com.hackathon.gezinti.R;
+import com.hackathon.gezinti.models.common.Coordinates;
 import com.hackathon.gezinti.models.common.Event;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, GoogleMap.OnInfoWindowClickListener {
+        LocationListener, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMapLongClickListener {
+
+    public static MapFragment instance;
 
     /*  Required for Google Maps  */
     private MapView mapView;
@@ -56,6 +60,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     public MapFragment() {
         // Required empty public constructor
+    }
+
+    public static MapFragment getInstance(){
+        if(instance == null)
+            instance = new MapFragment();
+        return instance;
     }
 
     @Override
@@ -96,6 +106,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
 
         this.googleMap.setOnInfoWindowClickListener(this);
+        this.googleMap.setOnMapLongClickListener(this);
         makeRequestAndPin();
     }
 
@@ -184,6 +195,60 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         startActivity(intent);
     }
 
+
+    //
+    //  Event Create Methods
+    //
+    List<Marker> mMarkerList;
+    ArrayList<Coordinates> mCoordinatesList;
+    boolean mCreatorMode = false;
+    public void openEventCreatorMode(){
+        googleMap.clear();
+        if(mCoordinatesList == null) {
+            mCoordinatesList = new ArrayList<>();
+            mMarkerList = new ArrayList<>();
+        }
+        mCoordinatesList.clear();
+        mMarkerList.clear();
+        mCreatorMode = true;
+    }
+    public void closeEventCreatorMode(){
+        googleMap.clear();
+        mCoordinatesList.clear();
+        mMarkerList.clear();
+        mCreatorMode = false;
+    }
+    private Marker tempMarker;
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        if(mCreatorMode){
+            tempMarker = this.googleMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(""+mCoordinatesList.size())
+            );
+            mMarkerList.add(tempMarker);
+            mCoordinatesList.add(new Coordinates(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude)));
+        }
+    }
+    public void popCoordinate(){
+        if(mCoordinatesList != null && mCoordinatesList.size() > 0){
+            mCoordinatesList.remove(mCoordinatesList.size()-1);
+            Marker temp = mMarkerList.get(mMarkerList.size()-1);
+            mMarkerList.remove(mMarkerList.size()-1);
+            temp.remove();
+        }
+    }
+    public ArrayList<Coordinates> getCoordinatesList(){
+        if(mCoordinatesList != null && mCoordinatesList.size()>0)
+            return mCoordinatesList;
+        return null;
+    }
+    //
+    //  Event Create Methods
+    //
+
+
+
     //deprecated
     public void makeRequestAndPin() {
 
@@ -207,7 +272,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         getLocation = !getLocation;
 
     }
-
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(),
                 FINE_LOCATION[0])
@@ -238,7 +302,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             return true;
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -272,36 +335,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             // You can add here other case statements according to your requirement.
         }
     }
-
     @Override
     public void onConnectionSuspended(int i) {
 
     }
-
     @Override
     public void onResume() {
         super.onResume();
         if (mapView != null) mapView.onResume();
     }
-
     @Override
     public void onPause() {
         super.onPause();
         if (mapView != null) mapView.onPause();
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mapView != null) mapView.onDestroy();
     }
-
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         if (mapView != null) mapView.onLowMemory();
     }
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 

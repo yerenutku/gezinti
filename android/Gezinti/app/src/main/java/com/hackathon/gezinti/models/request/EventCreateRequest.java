@@ -23,6 +23,12 @@ public class EventCreateRequest extends BaseRequest {
     @SerializedName("time")
     private String time;
 
+    @SerializedName("eventType")
+    private String eventType;
+
+    @SerializedName("eventTime")
+    private String eventTime;
+
     @SerializedName("location")
     private ArrayList<Coordinates> mCoordinates;
 
@@ -44,6 +50,14 @@ public class EventCreateRequest extends BaseRequest {
 
     public void setCoordinates(ArrayList<Coordinates> coordinates) {
         mCoordinates = coordinates;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
     }
 
     @Override

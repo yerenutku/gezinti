@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
 
         if(savedInstanceState == null) {
-            mMapFragment = new MapFragment();
+            mMapFragment = MapFragment.getInstance();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fl_map_container, mMapFragment, "")
                     .commit();
