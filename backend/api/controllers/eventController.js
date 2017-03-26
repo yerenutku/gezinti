@@ -84,7 +84,7 @@ exports.getEventsByLatLong = function(req,res){
       for(var i = 0; i < locations.length; i++){
         var pair = locations[i];
         var distance = getDistance(pair,{lat:lat1,lon:lon1});
-        if(distance*2 < 10){
+        if(distance < 10){
           console.log(distance);
           resultArray.push(elem);
           break;
@@ -113,7 +113,6 @@ exports.registerEvent = function(req,res){
   try{
     var newEvent = new events(req.body);
   }catch(err){
-    console.log('cathed error');
     res.status(405).send({error: err});
   }
   if(new Date(newEvent.time)<new Date())
@@ -125,7 +124,6 @@ exports.registerEvent = function(req,res){
         res.json(populatedEvent);
     });
   }).catch(function(err){
-    console.log('hata',err);
     res.status(500).send({error: err});
   });
 };

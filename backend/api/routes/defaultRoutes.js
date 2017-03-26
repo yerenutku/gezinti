@@ -24,7 +24,7 @@ module.exports = function(app){
   app.route('/api/event/:eventId/remove')
     .post(eventController.removeEvent);
   app.route('/api/event/:eventId/:userId/join')
-    .post(eventController.joinEvent);
+    .get(eventController.joinEvent);
   app.route('/api/event/:eventId/:userId/remove')
-    .post(eventController.removeUserFromEvent);
+    .get(eventController.removeUserFromEvent);
 }
