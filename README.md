@@ -7,6 +7,7 @@ Subfolderlar halinde tüm projeler bu repo içerisinde toplanmıştır.
 - Eren Utku
 - Necil Albayrak
 - Yasin Arslan
+
 # İçindekiler
 - [Commit Standartı](#commit-standart)
 - [API Reference](#api-reference)
