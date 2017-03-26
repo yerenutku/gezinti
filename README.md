@@ -73,6 +73,7 @@ Android hakkındaki gerçekler
 
 Tek class üzerinden gerçekleşir. Jenerik sınıflar ile dönüş response tipi bilinir ve cast edilmesine gerek kalmaz. Request kendi responsunun tipine sahip olur.
 `get` ve `post` methodları birer tane fakat içerisine aldıklarını abstract BaseRequest sayesinde response tipini belirtmek zorunda olur.
+`SuccessListener<T>` şeklinde jenerik bir sınıf alır. Bu sınıf override edilip dönen `onSuccess` methodunun dönüş tipini belirler. 
 Örnek
 ```java
 yourInstance.post("yourUrl", request, new SuccessListener<EventCreateResponse>() {
