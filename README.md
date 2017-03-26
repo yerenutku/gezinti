@@ -30,4 +30,25 @@ Android/iOS hakkındaki gerçekler
 - volley
 - gson
 
+#### Servis Çağrıları
+
+Tek class üzerinden gerçekleşir. Jenerik sınıflar ile dönüş response tipi bilinir ve cast edilmesine gerek kalmaz. Request kendi responsunun tipine sahip olur.
+`get` ve `post` methodları birer tane fakat içerisine aldıklarını abstract BaseRequest sayesinde response tipini belirtmek zorunda olur.
+Örnek
+```java
+VolleyClientRequests.getInstance(mContext).post("yourUrl", request, new SuccessListener<EventCreateResponse>() {
+                    @Override
+                    public void onSuccess(EventCreateResponse response) {
+                        ...
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ...
+                    }
+                });
+                
+```
+
 #### 
