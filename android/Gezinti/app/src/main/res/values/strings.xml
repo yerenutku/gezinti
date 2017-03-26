@@ -12,6 +12,15 @@
     <string name="error_msg_parse">Parse Error</string>
     <string name="error_msg_btn_txt">Ok</string>
 
+    <string name="event_detail_title">"Event title: %s"</string>
+    <string name="event_detail_owner">"Event owner: %s"</string>
+    <string name="event_detail_desc">"Event description: %s"</string>
+    <string name="event_detail_time">"Event time: %s"</string>
+    <string name="event_detail_locations">"Event locations: %s"</string>
+    <string name="event_detail_members">"Event joined members: %s"</string>
+    <string name="btn_text_join">Join the event</string>
+    <string name="btn_text_leave">Leave the Event</string>
+
     <string-array name="array_event_types">
         <item>Choices</item>
         <item>Dinner</item>

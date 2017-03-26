@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 user = mongoose.model('users'),
 express = require('express');
 
-//get all users 
+//get all users
 exports.getUsers = function(req,res){
   user.find({}).exec().then(function(users) {
     res.json(users);
@@ -27,3 +27,17 @@ exports.selectUser = function(req,res){
     res.json(currentUser);
   }).catch(console.error);
 };
+
+exports.getUserProfile = function(req,res){
+  responseObj = {}
+  user.findOne({_id: req.params.userId}).exec().then(function(currentUser){
+    responseObj.user = currentUser;
+  }).then(function(){
+    events.find({members:{_id: req.params.userId}}).exec().then(function(eventList){
+      responseObj.events = eventList;
+    });
+  }).catch(function(err){
+    console.log('hata',err);
+    res.status(500).send({error: err});
+  });
+}

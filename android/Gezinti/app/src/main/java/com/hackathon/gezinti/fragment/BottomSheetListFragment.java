@@ -18,6 +18,7 @@ import android.widget.Spinner;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.hackathon.gezinti.EventDetailActivity;
+import com.hackathon.gezinti.MainActivity;
 import com.hackathon.gezinti.R;
 import com.hackathon.gezinti.adapters.EventsAdapter;
 import com.hackathon.gezinti.interfaces.EventCreateListener;
@@ -68,7 +69,7 @@ public class BottomSheetListFragment extends Fragment implements View.OnClickLis
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("EventDetail", mEvents.get(position));
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    getActivity().startActivityForResult(intent, MainActivity.EVENT_DETAIL_REQUEST_CODE);
                 }
             }
         }));

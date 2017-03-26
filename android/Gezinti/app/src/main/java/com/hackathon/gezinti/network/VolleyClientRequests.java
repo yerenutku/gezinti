@@ -40,7 +40,8 @@ public class VolleyClientRequests {
 
     public void post(String url, BaseRequest request, SuccessListener successListener, Response.ErrorListener errorListener) {
         try {
-            successListener.setResponseType(request.getResponseType());
+            if (request != null && request.getResponseType() != null)
+                successListener.setResponseType(request.getResponseType());
             String tempJson = mGson.toJson(request);
             JSONObject jsonObject = new JSONObject(tempJson);
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.BASE_URL + url, jsonObject, successListener, errorListener);
@@ -52,7 +53,7 @@ public class VolleyClientRequests {
 
     public void get(String url, Type type, SuccessListener successListener, Response.ErrorListener errorListener) {
         successListener.setResponseType(type);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BuildConfig.BASE_URL + url, null, successListener, errorListener);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, BuildConfig.BASE_URL + url, null, successListener, errorListener);
         requestQueue.add(jsonObjectRequest);
     }
 

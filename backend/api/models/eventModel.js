@@ -32,11 +32,16 @@ var eventSchema = new schema({
     lat : String,
     lon : String,
     _id: false
-     }],
-  messages:[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'messages'
-  }]
+  }],
+  eventType:{
+    type: Number,
+    default: 0,
+    Required: 'Event type is required'
+  },
+  eventTime:{
+    type: Number,
+    Required: 'Event time is required'
+  }
 });
 
 module.exports = mongoose.model('events', eventSchema);
