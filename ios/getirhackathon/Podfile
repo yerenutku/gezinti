@@ -1,6 +1,0 @@
-source 'https://github.com/CocoaPods/Specs.git'
-project '/Developer/getirhackathon/getirhackathon.xcodeproj'
-target 'getirhackathon' do
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
-end
