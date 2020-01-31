@@ -24,7 +24,7 @@ var allowCrossDomain = function(req, res, next) {
 
 console.log('Creating Database Connection');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://nalbayrak:ozamanrenkdans@ds141450.mlab.com:41450/gezentidb');
+mongoose.connect();
 console.log('Database Connected');
 
 app.use(session({secret: 'zalimcoding2017'}));
